@@ -1,0 +1,37 @@
+.buttons {
+
+  background-color: gold;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left{
+  width: 40%;
+}
+
+.left, .right {
+  width: 40%;
+}
+
+.middle {
+  width: 20%;
+}
+
+table {
+  border: 1px solid black;
+}
+th {
+  border: 1px solid black;
+}
+td {
+  border: 1px solid black;
+}
