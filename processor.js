@@ -6,7 +6,8 @@
   var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,
     indentUnit: 0,
-    lineSeparator: null
+    lineSeparator: null,
+    firstLineNumber: 0
 
 
   });
@@ -20,6 +21,7 @@ var stackPointer = -1;                                                          
 
 //Fill registers with random numbers
 for(var i = 0; i < 15; i++){
+  //Get random number between 0 and 3
   var randomNeg = Math.floor((Math.random()*3)+1);
   registers[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 }
@@ -129,9 +131,12 @@ function processor(first, second, third, fourth, fifth, lineValue){
   else if(first == "JMU"){
     lineValue = jmu(second, lineValue)-1;
   }
+  else if(first == "ALERT"){
+    second = second.toString();
+    alert(second);
+  }
   else{
-    lineAlert = lineValue + 1;
-    var text = "Unknown operation detected at "+ lineAlert;
+    var text = "Unknown operation detected at "+ lineValue;
     alert(text);
   }
   return lineValue;
@@ -543,9 +548,9 @@ function call(second, third, fourth, fifth){
     if(stackPointer == 3){
       //We need to add 2 to the lineValue when we store it because it needs to return a line after the lineValue and we need to add 1
       //To the value in stack aswell to show the line number in the codemirror
-      stack[stackPointer+1]=lineValue+2;
+      stack[stackPointer+1]=lineValue+1;
       //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-      lineValue = registers[dest]-1;
+      lineValue = registers[dest];
       //We need to take the last 4 values of the stack
       stack.splice(0,1);
 
@@ -554,9 +559,9 @@ function call(second, third, fourth, fifth){
     else{
       //We need to add 2 to the lineValue when we store it because it needs to return a line after the lineValue and we need to add 1
       //To the value in stack aswell to show the line number in the codemirror
-      stack[stackPointer+1]=lineValue+2;
+      stack[stackPointer+1]=lineValue+1;
       //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-      lineValue = registers[dest]-1;
+      lineValue = mregisters[dest];
       stackPointer++;
     }
   }
@@ -565,9 +570,9 @@ else if(ad == 1){
   if(stackPointer == 3){
     //We need to add 2 to the lineValue when we store it because it needs to return a line after the lineValue and we need to add 1
     //To the value in stack aswell to show the line number in the codemirror
-    stack[stackPointer+1]=lineValue+2;
+    stack[stackPointer+1]=lineValue+1;
     //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-    lineValue = mregisters[dest]-1;
+    lineValue = mregisters[dest];
     //We need to take the last 4 values of the stack
     stack.splice(0,1);
 
@@ -576,9 +581,9 @@ else if(ad == 1){
   else{
     //We need to add 2 to the lineValue when we store it because it needs to return a line after the lineValue and we need to add 1
     //To the value in stack aswell to show the line number in the codemirror
-    stack[stackPointer+1]=lineValue+2;
+    stack[stackPointer+1]=lineValue+1;
     //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-    lineValue = mregisters[dest]-1;
+    lineValue = mregisters[dest];
     stackPointer++;
   }
 
@@ -648,6 +653,5 @@ function jmu(second, lineValue){
     second = second % 128;
   }
   lineValue = lineValue + second;
-
+  return lineValue;
 }
-
