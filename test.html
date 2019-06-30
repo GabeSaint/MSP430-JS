@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+
+<h1>EE 215 Quick Compiler</h1>
+<p>Type Code here.</p>
+
+<div class="row">
+  <div class="column left">
+    <div id="topLevel"></div>
+    <textarea id="code" name="code"></textarea>
+  </div>
+  <div class="column middle">
+    <button class="buttons" type="button" name="Submit" onclick="submit()">Submit </button><br>
+    <button class="buttons" type="button" name="stepForward" onclick="stepForward()">Step forward</button><br>
+    <button class="buttons" type="button" name="clearRegisters" onclick="clearRegisters()">Clear</button>
+  </div>
+  <div class="column right" id="results">
+
+    <table>
+    <tr>
+    <th class="small section">Reg #</th>
+    <th>Register Contents</th>
+    <th>Decimal Value</th>
+    </tr>
+    <tr>
+      <td> 0</td>
+      <td id="register0bits"></td>
+      <td id="register0res"></td>
+        </tr>
+    <tr>
+    <td> 1</td>
+      <td id="register1bits"></td>
+      <td id="register1res"></td>
+        </tr>
+    <tr>
+      <td id="register2bits"></td>
+      <td id="register2res"></td>
+        </tr>
+    <tr>
+      <td id="register3bits">0000 0000 0000 0000</td>
+      <td id="register3res"></td>
+        </tr>
+    <tr>
+      <td id="register4bits">0000 0000 0000 0000</td>
+      <td id="register4res"></td>
+        </tr>
+    <tr>
+      <td id="register5bits">0000 0000 0000 0000</td>
+      <td id="register5res"></td>
+        </tr>
+    <tr>
+      <td id="register6bits">0000 0000 0000 0000</td>
+      <td id="register6res"></td>
+        </tr>
+    <tr>
+      <td id="register7bits">0000 0000 0000 0000</td>
+      <td id="register7res"></td>
+        </tr>
+    <tr>
+      <td id="register8bits">0000 0000 0000 0000</td>
+      <td id="register8res"></td>
+        </tr>
+    <tr>
+      <td id="register9bits">0000 0000 0000 0000</td>
+      <td id="register9res"></td>
+        </tr>
+    <tr>
+      <td id="register10bits">0000 0000 0000 0000</td>
+      <td id="register10res"></td>
+        </tr>
+    <tr>
+      <td id="register11bits">0000 0000 0000 0000</td>
+      <td id="register11res"></td>
+        </tr>
+    <tr>
+      <td id="register12bits">0000 0000 0000 0000</td>
+      <td id="register12res"></td>
+        </tr>
+    <tr>
+      <td id="register13bits">0000 0000 0000 0000</td>
+      <td id="register13res"></td>
+        </tr>
+    <tr>
+      <td id="register14bits">0000 0000 0000 0000</td>
+      <td id="register14res"></td>
+        </tr>
+    <tr>
+      <td id="register15bits">0000 0000 0000 0000</td>
+      <td id="register15res"></td>
+        </tr>
+  </table>
+
+
+  </div>
+
+  <div class="column right">
+
+      <table>
+      <tr>
+        <th>Flags and bits and stuff</th>
+        <th>Decimal Value</th>
+      </tr>
+
+          <tr>
+            <td id="mregister0bits">0000 0000 0000 0000</td>
+            <td id="mregister0res"></td>
+              </tr>
+      <tr>
+        <td id="mregister1bits">0000 0000 0000 0000</td>
+        <td id="mregister1res"></td>
+          </tr>
+      <tr>
+        <td id="mregister2bits">0000 0000 0000 0000</td>
+        <td id="mregister2res"></td>
+          </tr>
+      <tr>
+        <td id="mregister3bits">0000 0000 0000 0000</td>
+        <td id="mregister3res"></td>
+          </tr>
+      <tr>
+        <td id="mregister4bits">0000 0000 0000 0000</td>
+        <td id="mregister4res"></td>
+          </tr>
+      <tr>
+        <td id="mregister5bits">0000 0000 0000 0000</td>
+        <td id="mregister5res"></td>
+          </tr>
+      <tr>
+        <td id="mregister6bits">0000 0000 0000 0000</td>
+        <td id="mregister6res"></td>
+          </tr>
+      <tr>
+        <td id="mregister7bits">0000 0000 0000 0000</td>
+        <td id="mregister7res"></td>
+          </tr>
+      <tr>
+        <td id="mregister8bits">0000 0000 0000 0000</td>
+        <td id="mregister8res"></td>
+          </tr>
+      <tr>
+        <td id="mregister9bits">0000 0000 0000 0000</td>
+        <td id="mregister9res"></td>
+          </tr>
+      <tr>
+        <td id="mregister10bits">0000 0000 0000 0000</td>
+        <td id="mregister10res"></td>
+          </tr>
+      <tr>
+        <td id="mregister11bits">0000 0000 0000 0000</td>
+        <td id="mregister11res"></td>
+          </tr>
+      <tr>
+        <td id="mregister12bits">0000 0000 0000 0000</td>
+        <td id="mregister12res"></td>
+          </tr>
+      <tr>
+        <td id="mregister13bits">0000 0000 0000 0000</td>
+        <td id="mregister13res"></td>
+          </tr>
+      <tr>
+        <td id="mregister14bits">0000 0000 0000 0000</td>
+        <td id="mregister14res"></td>
+          </tr>
+      <tr>
+        <td id="mregister15bits">0000 0000 0000 0000</td>
+        <td id="mregister15res"></td>
+      </tr>
+
+    </table>
+  </div>
+
+
+</div>
+
+
+<script src="https://gabesaint.github.io/MSP430-JS/lib/codemirror.js"></script>
+<link rel="stylesheet" type="text/css" href="https://gabesaint.github.io/MSP430-JS/lib/codemirror.css">
+<script src="https://gabesaint.github.io/MSP430-JS/mode/gas/gas.js"></script>
+<link rel="stylesheet" type="text/css" href="https://gabesaint.github.io/MSP430-JS/prettymeup.css">
+<script src="https://gabesaint.github.io/MSP430-JS/processor.js"></script>
+</body>
+</html>
