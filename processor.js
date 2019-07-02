@@ -32,10 +32,10 @@ for(var i = 0; i < 16; i++){
 }
 
 function clearRegisters(){                                                               //clears all registers and resets linecounter                                                      //var for what line we read
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < 16; i++){
     registers[i] = 0
   }
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < 16; i++){
     mregisters[i] = 0
   }
 }
