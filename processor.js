@@ -121,6 +121,44 @@ function submit(){
     document.getElementById("register13bits").innerHTML = registers[13].toString(2);
     document.getElementById("register14bits").innerHTML = registers[14].toString(2);
     document.getElementById("register15bits").innerHTML = registers[15].toString(2);
+  
+  // Show Decimal Value - for memory
+
+    document.getElementById("mregister0res").innerHTML = mregisters[0];
+    document.getElementById("mregister1res").innerHTML = mregisters[1];
+    document.getElementById("mregister2res").innerHTML = mregisters[2];
+    document.getElementById("mregister3res").innerHTML = mregisters[3];
+    document.getElementById("mregister4res").innerHTML = mregisters[4];
+    document.getElementById("mregister5res").innerHTML = mregisters[5];
+    document.getElementById("mregister6res").innerHTML = mregisters[6];
+    document.getElementById("mregister7res").innerHTML = mregisters[7];
+    document.getElementById("mregister8res").innerHTML = mregisters[8];
+    document.getElementById("mregister9res").innerHTML = mregisters[9];
+    document.getElementById("mregister10res").innerHTML = mregisters[10];
+    document.getElementById("mregister11res").innerHTML = mregisters[11];
+    document.getElementById("mregister12res").innerHTML = mregisters[12];
+    document.getElementById("mregister13res").innerHTML = mregisters[13];
+    document.getElementById("mregister14res").innerHTML = mregisters[14];
+    document.getElementById("mregister15res").innerHTML = mregisters[15];
+
+    // Show Bit Value - for memory
+
+    document.getElementById("mregister0bits").innerHTML = mregisters[0].toString(2);
+    document.getElementById("mregister1bits").innerHTML = mregisters[1].toString(2);
+    document.getElementById("mregister2bits").innerHTML = mregisters[2].toString(2);
+    document.getElementById("mregister3bits").innerHTML = mregisters[3].toString(2);
+    document.getElementById("mregister4bits").innerHTML = mregisters[4].toString(2);
+    document.getElementById("mregister5bits").innerHTML = mregisters[5].toString(2);
+    document.getElementById("mregister6bits").innerHTML = mregisters[6].toString(2);
+    document.getElementById("mregister7bits").innerHTML = mregisters[7].toString(2);
+    document.getElementById("mregister8bits").innerHTML = mregisters[8].toString(2);
+    document.getElementById("mregister9bits").innerHTML = mregisters[9].toString(2);
+    document.getElementById("mregister10bits").innerHTML = mregisters[10].toString(2);
+    document.getElementById("mregister11bits").innerHTML = mregisters[11].toString(2);
+    document.getElementById("mregister12bits").innerHTML = mregisters[12].toString(2);
+    document.getElementById("mregister13bits").innerHTML = mregisters[13].toString(2);
+    document.getElementById("mregister14bits").innerHTML = mregisters[14].toString(2);
+    document.getElementById("mregister15bits").innerHTML = mregisters[15].toString(2);
 
 
 
