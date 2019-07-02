@@ -38,6 +38,7 @@ function clearRegisters(){                                                      
   for(var i = 0; i < 16; i++){
     mregisters[i] = 0
   }
+  showRegisters();
 }
 
 function stepForward(){
@@ -59,6 +60,7 @@ function stepForward(){
   else {
     lineValue++;
   }
+  showRegisters();
 }
 
 function submit(){
@@ -81,9 +83,12 @@ function submit(){
 
       }
   }
+  showRegisters();
+}
 
-      document.getElementById("topLevel").innerHTML = "register 0 is " +registers[0];
-  
+
+function showRegisters(){
+
       // Show Decimal Value
 
     document.getElementById("register0res").innerHTML = registers[0];
@@ -121,7 +126,7 @@ function submit(){
     document.getElementById("register13bits").innerHTML = registers[13].toString(2);
     document.getElementById("register14bits").innerHTML = registers[14].toString(2);
     document.getElementById("register15bits").innerHTML = registers[15].toString(2);
-  
+
   // Show Decimal Value - for memory
 
     document.getElementById("mregister0res").innerHTML = mregisters[0];
@@ -159,11 +164,11 @@ function submit(){
     document.getElementById("mregister13bits").innerHTML = mregisters[13].toString(2);
     document.getElementById("mregister14bits").innerHTML = mregisters[14].toString(2);
     document.getElementById("mregister15bits").innerHTML = mregisters[15].toString(2);
-
-
-
-
 }
+
+
+
+
 
 function processor(first, second, third, fourth, fifth, lineValue){
   var lineValue = lineValue;
