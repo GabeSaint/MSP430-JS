@@ -42,19 +42,23 @@ function clearRegisters(){                                                      
 
 function stepForward(){
 
-  var program = editor.doc.getLine(lineValue)
-  var split_code = program.split(" ",5);
-  var first = split_code[0];
-  first = first.toUpperCase();
-  var second = parseInt(split_code[1]);
-  var third = parseInt(split_code[2]);
-  var fourth = parseInt(split_code[3]);
-  var fifth = parseInt(split_code[4]);
-  lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  document.getElementById("topLevel").innerHTML = "register 0 is " + registers[0]
+  var program = editor.doc.getLine(lineValue);
 
-  lineValue++;
-
+  if(/\S/.test(program)){
+    var split_code = program.split(" ",5);
+    var first = split_code[0];
+    first = first.toUpperCase();
+    var second = parseInt(split_code[1]);
+    var third = parseInt(split_code[2]);
+    var fourth = parseInt(split_code[3]);
+    var fifth = parseInt(split_code[4]);
+    lineValue = processor(first, second, third, fourth, fifth, lineValue);
+    document.getElementById("topLevel").innerHTML = "register 0 is " + registers[0]
+    lineValue++;
+  }
+  else {
+    lineValue++;
+  }
 }
 
 function submit(){
@@ -62,16 +66,21 @@ function submit(){
 
   for (var i = 0; i <line_count; i++) {
       var program = editor.doc.getLine(i);
-      var split_code = program.split(" ",6);
-      var first = split_code[0];
+      if(/\S/.test(program)){
+        var split_code = program.split(" ",6);
+        var first = split_code[0];
 
-      first = first.toUpperCase();
-      var second = parseInt(split_code[1]);
-      var third = parseInt(split_code[2]);
-      var fourth = parseInt(split_code[3]);
-      var fifth = parseInt(split_code[4]);
-      i = processor(first, second, third, fourth, fifth, i);
+        first = first.toUpperCase();
+        var second = parseInt(split_code[1]);
+        var third = parseInt(split_code[2]);
+        var fourth = parseInt(split_code[3]);
+        var fifth = parseInt(split_code[4]);
+        i = processor(first, second, third, fourth, fifth, i);
       }
+      else{
+
+      }
+  }
 
       document.getElementById("topLevel").innerHTML = "register 0 is " +registers[0];
 
@@ -591,11 +600,16 @@ else if(ad == 1){
   return lineValue;
 }
 function ret(lineValue){
+  if(stackPointer == -1){
+    alert("Nothing in stack")
+  }
+  else {
+
   lineValue = stack[stackPointer];
   stack.splice(stackPointer,1);
   stackPointer--;
   return lineValue;
-
+  }
 }
 function jmz(second,lineValue){
   if(second < -128){
