@@ -83,6 +83,44 @@ function submit(){
   }
 
       document.getElementById("topLevel").innerHTML = "register 0 is " +registers[0];
+  
+      // Show Decimal Value
+
+    document.getElementById("register0res").innerHTML = registers[0];
+    document.getElementById("register1res").innerHTML = registers[1];
+    document.getElementById("register2res").innerHTML = registers[2];
+    document.getElementById("register3res").innerHTML = registers[3];
+    document.getElementById("register4res").innerHTML = registers[4];
+    document.getElementById("register5res").innerHTML = registers[5];
+    document.getElementById("register6res").innerHTML = registers[6];
+    document.getElementById("register7res").innerHTML = registers[7];
+    document.getElementById("register8res").innerHTML = registers[8];
+    document.getElementById("register9res").innerHTML = registers[9];
+    document.getElementById("register10res").innerHTML = registers[10];
+    document.getElementById("register11res").innerHTML = registers[11];
+    document.getElementById("register12res").innerHTML = registers[12];
+    document.getElementById("register13res").innerHTML = registers[13];
+    document.getElementById("register14res").innerHTML = registers[14];
+    document.getElementById("register15res").innerHTML = registers[15];
+
+    // Show Bit Value
+
+    document.getElementById("register0bits").innerHTML = registers[0]..toString(2);
+    document.getElementById("register1bits").innerHTML = registers[1].toString(2);
+    document.getElementById("register2bits").innerHTML = registers[2].toString(2);
+    document.getElementById("register3bits").innerHTML = registers[3].toString(2);
+    document.getElementById("register4bits").innerHTML = registers[4].toString(2);
+    document.getElementById("register5bits").innerHTML = registers[5].toString(2);
+    document.getElementById("register6bits").innerHTML = registers[6].toString(2);
+    document.getElementById("register7bits").innerHTML = registers[7].toString(2);
+    document.getElementById("register8bits").innerHTML = registers[8].toString(2);
+    document.getElementById("register9bits").innerHTML = registers[9].toString(2);
+    document.getElementById("register10bits").innerHTML = registers[10].toString(2);
+    document.getElementById("register11bits").innerHTML = registers[11].toString(2);
+    document.getElementById("register12bits").innerHTML = registers[12].toString(2);
+    document.getElementById("register13bits").innerHTML = registers[13].toString(2);
+    document.getElementById("register14bits").innerHTML = registers[14].toString(2);
+    document.getElementById("register15bits").innerHTML = registers[15].toString(2);
 
 
 
