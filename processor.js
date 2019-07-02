@@ -20,12 +20,12 @@ var stack = [0, 0 ,0 ,0, 0 ,0];
 var stackPointer = -1;                                                          // memory register variables
 
 //Fill registers with random numbers
-for(var i = 0; i < 15; i++){
+for(var i = 0; i < 16; i++){
   //Get random number between 0 and 3
   var randomNeg = Math.floor((Math.random()*3)+1);
   registers[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 }
-for(var i = 0; i < 15; i++){
+for(var i = 0; i < 16; i++){
   //Get random number between 0 and 3
   var randomNeg = Math.floor((Math.random()*3)+1)
   mregisters[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
