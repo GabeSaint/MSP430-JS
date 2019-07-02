@@ -105,7 +105,7 @@ function submit(){
 
     // Show Bit Value
 
-    document.getElementById("register0bits").innerHTML = registers[0]..toString(2);
+    document.getElementById("register0bits").innerHTML = registers[0].toString(2);
     document.getElementById("register1bits").innerHTML = registers[1].toString(2);
     document.getElementById("register2bits").innerHTML = registers[2].toString(2);
     document.getElementById("register3bits").innerHTML = registers[3].toString(2);
