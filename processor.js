@@ -165,6 +165,13 @@ function showRegisters(){
     document.getElementById("mregister13bits").innerHTML = mregisters[13].toString(2);
     document.getElementById("mregister14bits").innerHTML = mregisters[14].toString(2);
     document.getElementById("mregister15bits").innerHTML = mregisters[15].toString(2);
+  
+  // Stack Output
+  
+    document.getElementById("stackbits0").innerHTML = stack[12].toString(2);
+    document.getElementById("stackbits1").innerHTML = stack[13].toString(2);
+    document.getElementById("stackbits2").innerHTML = stack[14].toString(2);
+    document.getElementById("stackbits3").innerHTML = stack[15].toString(2);
 }
 
 
