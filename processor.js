@@ -111,7 +111,7 @@ function showRegisters(){
 
     // Show Bit Value
 
-    document.getElementById("register0bits").innerHTML = registers[0].toString(2);
+    document.getElementById("register0bits").innerHTML = getStringBits(registers[0]);
     document.getElementById("register1bits").innerHTML = registers[1].toString(2);
     document.getElementById("register2bits").innerHTML = registers[2].toString(2);
     document.getElementById("register3bits").innerHTML = registers[3].toString(2);
@@ -149,7 +149,7 @@ function showRegisters(){
 
     // Show Bit Value - for memory
 
-    document.getElementById("mregister0bits").innerHTML = mregisters[0].toString(2);
+    document.getElementById("mregister0bits").innerHTML = getStringBits(mregisters[0]);
     document.getElementById("mregister1bits").innerHTML = mregisters[1].toString(2);
     document.getElementById("mregister2bits").innerHTML = mregisters[2].toString(2);
     document.getElementById("mregister3bits").innerHTML = mregisters[3].toString(2);
@@ -165,15 +165,30 @@ function showRegisters(){
     document.getElementById("mregister13bits").innerHTML = mregisters[13].toString(2);
     document.getElementById("mregister14bits").innerHTML = mregisters[14].toString(2);
     document.getElementById("mregister15bits").innerHTML = mregisters[15].toString(2);
-  
+
   // Stack Output
-  
+
     document.getElementById("stackbits0").innerHTML = stack[3];
     document.getElementById("stackbits1").innerHTML = stack[2];
     document.getElementById("stackbits2").innerHTML = stack[1];
     document.getElementById("stackbits3").innerHTML = stack[0];
 }
 
+function getStringBits(regValue){
+  var regBit;
+  if(regValue < 0){
+    regBit = (regValue>>>0).toString;
+    regBit = regBit | 0x8000;
+    regBit = regBit & 0xFFFF;
+  }
+  else{
+     regBit = regValue.toString(2);
+     while(regBit.length < 16){
+       regBit = "0" + regBit;
+     }
+  }
+  return regBit;
+}
 
 
 
