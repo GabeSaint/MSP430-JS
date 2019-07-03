@@ -168,10 +168,10 @@ function showRegisters(){
   
   // Stack Output
   
-    document.getElementById("stackbits0").innerHTML = stack[12];
-    document.getElementById("stackbits1").innerHTML = stack[13];
-    document.getElementById("stackbits2").innerHTML = stack[14];
-    document.getElementById("stackbits3").innerHTML = stack[15];
+    document.getElementById("stackbits0").innerHTML = stack[3];
+    document.getElementById("stackbits1").innerHTML = stack[2];
+    document.getElementById("stackbits2").innerHTML = stack[1];
+    document.getElementById("stackbits3").innerHTML = stack[0];
 }
 
 
