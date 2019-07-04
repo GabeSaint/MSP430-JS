@@ -15,7 +15,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
                                                         //var for what line we read
 
 var registers = new Int16Array(16);                                                                     // register variables
-var mregisters = new Int16Array(16);
+var mregisters = new Int16Array(256);
 var stack = [0, 0 ,0 ,0, 0 ,0];
 var stackPointer = -1;                                                          // memory register variables
 
@@ -25,7 +25,7 @@ for(var i = 0; i < 16; i++){
 var randomNeg = Math.floor((Math.random()*3)+1);
 registers[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 }
-for(var i = 0; i < 16; i++){
+for(var i = 0; i < 256; i++){
 //Get random number between 0 and 3
 var randomNeg = Math.floor((Math.random()*3)+1)
 mregisters[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
@@ -112,21 +112,21 @@ function showRegisters(){
   // Show Bit Value
 
   document.getElementById("register0bits").innerHTML = getStringBits(registers[0]);
-  document.getElementById("register1bits").innerHTML = registers[1].toString(2);
-  document.getElementById("register2bits").innerHTML = registers[2].toString(2);
-  document.getElementById("register3bits").innerHTML = registers[3].toString(2);
-  document.getElementById("register4bits").innerHTML = registers[4].toString(2);
-  document.getElementById("register5bits").innerHTML = registers[5].toString(2);
-  document.getElementById("register6bits").innerHTML = registers[6].toString(2);
-  document.getElementById("register7bits").innerHTML = registers[7].toString(2);
-  document.getElementById("register8bits").innerHTML = registers[8].toString(2);
-  document.getElementById("register9bits").innerHTML = registers[9].toString(2);
-  document.getElementById("register10bits").innerHTML = registers[10].toString(2);
-  document.getElementById("register11bits").innerHTML = registers[11].toString(2);
-  document.getElementById("register12bits").innerHTML = registers[12].toString(2);
-  document.getElementById("register13bits").innerHTML = registers[13].toString(2);
-  document.getElementById("register14bits").innerHTML = registers[14].toString(2);
-  document.getElementById("register15bits").innerHTML = registers[15].toString(2);
+  document.getElementById("register1bits").innerHTML = getStringBits(registers[1]);
+  document.getElementById("register2bits").innerHTML = getStringBits(registers[2])
+  document.getElementById("register3bits").innerHTML = getStringBits(registers[3]);
+  document.getElementById("register4bits").innerHTML = getStringBits(registers[4]);
+  document.getElementById("register5bits").innerHTML = getStringBits(registers[5]);
+  document.getElementById("register6bits").innerHTML = getStringBits(registers[6]);
+  document.getElementById("register7bits").innerHTML = getStringBits(registers[7]);
+  document.getElementById("register8bits").innerHTML = getStringBits(registers[8]);
+  document.getElementById("register9bits").innerHTML = getStringBits(registers[9]);
+  document.getElementById("register10bits").innerHTML = getStringBits(registers[10]);
+  document.getElementById("register11bits").innerHTML = getStringBits(registers[11]);
+  document.getElementById("register12bits").innerHTML = getStringBits(registers[12]);
+  document.getElementById("register13bits").innerHTML = getStringBits(registers[13]);
+  document.getElementById("register14bits").innerHTML = getStringBits(registers[14]);
+  document.getElementById("register15bits").innerHTML = getStringBits(registers[15]);
 
 // Show Decimal Value - for memory
 
@@ -150,7 +150,7 @@ function showRegisters(){
   // Show Bit Value - for memory
 
   document.getElementById("mregister0bits").innerHTML = getStringBits(mregisters[0]);
-  document.getElementById("mregister1bits").innerHTML = mregisters[1].toString(2);
+  document.getElementById("mregister1bits").innerHTML = getStringBits(mregisters[1]);
   document.getElementById("mregister2bits").innerHTML = mregisters[2].toString(2);
   document.getElementById("mregister3bits").innerHTML = mregisters[3].toString(2);
   document.getElementById("mregister4bits").innerHTML = mregisters[4].toString(2);
@@ -262,6 +262,7 @@ var source = Math.abs(third % 16);
 var ad = Math.abs(fourth % 2);
 var as = Math.abs(fifth % 4);
 var sourceValue;
+cflg = 0;
 
 
 if(as == 0){
@@ -276,9 +277,13 @@ if(as == 0){
     if(sourceValue < 0){
       nflg = 1;
     }
+    else{
+      nflg = 0;
+    }
 }
 else if(as == 1){
-    sourceValue = mregisters[source];
+    var mregsource = regster[source] % 255;
+    sourceValue = mregisters[mregsource];
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
@@ -286,9 +291,16 @@ else if(as == 1){
     else {
       zflg = 0;
     }
+    if(sourceValue < 0){
+      nflg = 1;
+    }
+    else{
+      nflg = 0;
+    }
 }
 else if(as == 2){
     sourceValue = source;
+    nflg = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
@@ -299,6 +311,7 @@ else if(as == 2){
 }
 else if(as == 3){
     sourceValue = source*17;
+    nflg = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
@@ -311,257 +324,277 @@ if(ad == 0){
   registers[dest]= sourceValue;
 }
 else if(ad == 1){
-  mregisters[dest]= sourceValue;
+  var mregdest = register[dest] % 255
+  mregisters[mregdest]= sourceValue;
 }
 }
 function cmp(second, third, fourth, fifth){
 
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-var sourceValue;
-var compareValue;
+  var dest = Math.abs(second % 16);
+  var source = Math.abs(third % 16);
+  var ad = Math.abs(fourth % 2);
+  var as = Math.abs(fifth % 4);
+  var sourceValue;
+  var compareValue;
+  var compareCarryCheck;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  compareValue = registers[dest]-sourceValue;
+  if(as == 0){
+      sourceValue = registers[source];
+  }
+  else if(as == 1){
+      var mregsource = register[source] % 255;
+      sourceValue = mregisters[mregsource];
+  }
+  else if(as == 2){
+      sourceValue = source;
+  }
+  else if(as == 3){
+      sourceValue = source*17;
+  }
+  if(ad == 0){
+    compareValue = registers[dest]-sourceValue;
+    compareCarryCheck = registers[dest]+65536-sourceValue;
 
-}
-else if(ad == 1){
-  compareValue = mregisters[dest]-sourceValue;
-}
-//check if value is zero or negative
-if(compareValue == 0){
-  zflg = 1;
-}
-else {
-  zflg = 0;
-}
-if(compareValue < 0){
-  nflg = 1;
-}
-else {
-  nflg = 0;
-}
-}
-function add(second, third, fourth, fifth){
+  }
+  else if(ad == 1){
+    var mregdest = register[dest] % 255
+    compareValue = mregisters[mregdest]-sourceValue;
+    compareCarryCheck = mregisters[mregdest] + 65536 - sourceValue;
+  }
+  //check if value is zero or negative
+  if(compareValue == 0){
+    zflg = 1;
+  }
+  else {
+    zflg = 0;
+  }
+  if(compareValue < 0){
+    nflg = 1;
+  }
+  else {
+    nflg = 0;
+  }
+  if(compareCarryCheck > 65535){
+    cflg = 1;
+  }
+  else{
+    cflg = 0;
+  }
+  }
+  function add(second, third, fourth, fifth){
 
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-var sourceValue;
-var addCheck;
+  var dest = Math.abs(second % 16);
+  var source = Math.abs(third % 16);
+  var ad = Math.abs(fourth % 2);
+  var as = Math.abs(fifth % 4);
+  var sourceValue;
+  var addCheck;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  addCheck = registers[dest]+sourceValue;
-  registers[dest]= registers[dest]+sourceValue;
-}
-else if(ad == 1){
-  addCheck = mregisters[dest]+sourceValue;
-  mregisters[dest]= mregisters[dest]+sourceValue;
-}
-//check for the value of flags
-if(addCheck == 0){
-  zflg = 1;
-}
-else {
-  zflg = 0;
-}
-if(addCheck > 32767 || addCheck < -32768){
-  cflg = 1;
-}
-else {
-  cflg = 0;
-}
-if(addCheck < 0){
-  nflg = 1;
-}
-else {
-  nflg = 0;
-}
-}
-function addc(second, third, fourth, fifth){
+  if(as == 0){
+      sourceValue = registers[source];
+  }
+  else if(as == 1){
+      sourceValue = mregisters[source];
+  }
+  else if(as == 2){
+      sourceValue = source;
+  }
+  else if(as == 3){
+      sourceValue = source*17;
+  }
+  if(ad == 0){
+    addCheck = registers[dest]+sourceValue;
+    registers[dest]= registers[dest]+sourceValue;
+  }
+  else if(ad == 1){
+    addCheck = mregisters[dest]+sourceValue;
+    mregisters[dest]= mregisters[dest]+sourceValue;
+  }
+  //check for the value of flags
+  if(addCheck == 0){
+    zflg = 1;
+  }
+  else {
+    zflg = 0;
+  }
+  if(addCheck > 32767 || addCheck < -32768){
+    cflg = 1;
+  }
+  else {
+    cflg = 0;
+  }
+  if(addCheck < 0){
+    nflg = 1;
+  }
+  else {
+    nflg = 0;
+  }
+  }
+  function addc(second, third, fourth, fifth){
 
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-//need function variable to track value of source
-var sourceValue;
-//need function variable to store a value that goes over the the limits of 16 bit signed integar -32768 < x < 32767
-var addCheck;
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  addCheck = registers[dest]+sourceValue+cflg;
-  registers[dest] = registers[dest]+sourceValue+cflg;
-}
-else if(ad == 1){
-  addCheck = mregisters[dest]+sourceValue+cflg;
-  mregisters[dest]= mregisters[dest]+sourceValue+cflg;
-}
-//check for the value of flags
-if(addCheck == 0){
-  zflg = 1;
-}
-else {
-  zflg = 0;
-}
-if(addCheck > 32767 || addCheck < -32768){
-  cflg = 1;
-}
-else {
-  cflg = 0;
-}
-if(addCheck < 0){
-  nflg = 1;
-}
-else {
-  nflg = 0;
-}
-}
-function inv(second, third, fourth, fifth){
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-//need function variable to track value of source
-var sourceValue;
+  var dest = Math.abs(second % 16);
+  var source = Math.abs(third % 16);
+  var ad = Math.abs(fourth % 2);
+  var as = Math.abs(fifth % 4);
+  //need function variable to track value of source
+  var sourceValue;
+  //need function variable to store a value that goes over the the limits of 16 bit signed integar -32768 < x < 32767
+  var addCheck;
+  if(as == 0){
+      sourceValue = registers[source];
+  }
+  else if(as == 1){
+      sourceValue = mregisters[source];
+  }
+  else if(as == 2){
+      sourceValue = source;
+  }
+  else if(as == 3){
+      sourceValue = source*17;
+  }
+  if(ad == 0){
+    addCheck = registers[dest]+sourceValue+cflg;
+    registers[dest] = registers[dest]+sourceValue+cflg;
+  }
+  else if(ad == 1){
+    addCheck = mregisters[dest]+sourceValue+cflg;
+    mregisters[dest]= mregisters[dest]+sourceValue+cflg;
+  }
+  //check for the value of flags
+  if(addCheck == 0){
+    zflg = 1;
+  }
+  else {
+    zflg = 0;
+  }
+  if(addCheck > 32767 || addCheck < -32768){
+    cflg = 1;
+  }
+  else {
+    cflg = 0;
+  }
+  if(addCheck < 0){
+    nflg = 1;
+  }
+  else {
+    nflg = 0;
+  }
+  }
+  function inv(second, third, fourth, fifth){
+  var dest = Math.abs(second % 16);
+  var source = Math.abs(third % 16);
+  var ad = Math.abs(fourth % 2);
+  var as = Math.abs(fifth % 4);
+  //need function variable to track value of source
+  var sourceValue;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  registers[dest]= ~sourceValue;
-}
-else if(ad == 1){
-  mregisters[dest]= ~sourceValue;
-}
+  if(as == 0){
+      sourceValue = registers[source];
+  }
+  else if(as == 1){
+      var mregsource = registers[source];
+      sourceValue = mregisters[mregsource];
+  }
+  else if(as == 2){
+      sourceValue = source;
+  }
+  else if(as == 3){
+      sourceValue = source*17;
+  }
+  if(ad == 0){
+    registers[dest]= ~sourceValue;
+  }
+  else if(ad == 1){
+    var mregdest = registers[dest]
+    mregisters[dest]= ~sourceValue;
+  }
 }
 function or(second, third, fourth, fifth){
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-//need function variable to track value of source
-var sourceValue;
+    var dest = Math.abs(second % 16);
+    var source = Math.abs(third % 16);
+    var ad = Math.abs(fourth % 2);
+    var as = Math.abs(fifth % 4);
+    //need function variable to track value of source
+    var sourceValue;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  registers[dest]= registers[dest]|sourceValue;
-}
-else if(ad == 1){
-  mregisters[dest]= mregisters[dest]|sourceValue;
-}
-}
+    if(as == 0){
+        sourceValue = registers[source];
+    }
+    else if(as == 1){
+        var mregsource = registers[source]
+        sourceValue = mregisters[mregsource];
+    }
+    else if(as == 2){
+        sourceValue = source;
+    }
+    else if(as == 3){
+        sourceValue = source*17;
+    }
+    if(ad == 0){
+      registers[dest]= registers[dest]|sourceValue;
+    }
+    else if(ad == 1){
+      var mregdest = registers[dest];
+      mregisters[dest]= mregisters[mregdest]|sourceValue;
+    }
+  }
 function xor(second, third, fourth, fifth){
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-//need function variable to track value of source
-var sourceValue;
+    var dest = Math.abs(second % 16);
+    var source = Math.abs(third % 16);
+    var ad = Math.abs(fourth % 2);
+    var as = Math.abs(fifth % 4);
+    //need function variable to track value of source
+    var sourceValue;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  registers[dest]= registers[dest]^sourceValue;
-}
-else if(ad == 1){
-  mregisters[dest]= mregisters[dest]^sourceValue;
-}
+    if(as == 0){
+        sourceValue = registers[source];
+    }
+    else if(as == 1){
+        var mregsource = register[source];
+        sourceValue = mregisters[mregsource];
+    }
+    else if(as == 2){
+        sourceValue = source;
+    }
+    else if(as == 3){
+        sourceValue = source*17;
+    }
+    if(ad == 0){
+      registers[dest]= registers[dest]^sourceValue;
+    }
+    else if(ad == 1){
+      var mregdest = register[dest];
+      mregisters[dest]= mregisters[mregdest]^sourceValue;
+    }
 }
 function and(second, third, fourth, fifth){
-var dest = Math.abs(second % 16);
-var source = Math.abs(third % 16);
-var ad = Math.abs(fourth % 2);
-var as = Math.abs(fifth % 4);
-//need function variable to track value of source
-var sourceValue;
+  var dest = Math.abs(second % 16);
+  var source = Math.abs(third % 16);
+  var ad = Math.abs(fourth % 2);
+  var as = Math.abs(fifth % 4);
+  //need function variable to track value of source
+  var sourceValue;
 
-if(as == 0){
-    sourceValue = registers[source];
-}
-else if(as == 1){
-    sourceValue = mregisters[source];
-}
-else if(as == 2){
-    sourceValue = source;
-}
-else if(as == 3){
-    sourceValue = source*17;
-}
-if(ad == 0){
-  registers[dest]= registers[dest]&sourceValue;
-}
-else if(ad == 1){
-  mregisters[dest]= mregisters[dest]&sourceValue;
-}
+  if(as == 0){
+      sourceValue = registers[source];
+  }
+  else if(as == 1){
+      var mregsource = registers[source];
+      sourceValue = mregisters[mregsource];
+  }
+  else if(as == 2){
+      sourceValue = source;
+  }
+  else if(as == 3){
+      sourceValue = source*17;
+  }
+  if(ad == 0){
+    registers[dest]= registers[dest]&sourceValue;
+  }
+  else if(ad == 1){
+    var mregdest = registers[dest];
+    mregisters[dest]= mregisters[mregdest]&sourceValue;
+  }
 }
 function rrc(second, third){
 var dest = Math.abs(second % 16);
