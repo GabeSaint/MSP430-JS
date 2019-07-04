@@ -381,7 +381,7 @@ function cmp(second, third, fourth, fifth){
     cflg = 0;
   }
   }
-  function add(second, third, fourth, fifth){
+function add(second, third, fourth, fifth){
 
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
@@ -394,7 +394,8 @@ function cmp(second, third, fourth, fifth){
       sourceValue = registers[source];
   }
   else if(as == 1){
-      sourceValue = mregisters[source];
+      var mregsource = registers[source];
+      sourceValue = mregisters[mregsource];
   }
   else if(as == 2){
       sourceValue = source;
@@ -407,8 +408,9 @@ function cmp(second, third, fourth, fifth){
     registers[dest]= registers[dest]+sourceValue;
   }
   else if(ad == 1){
-    addCheck = mregisters[dest]+sourceValue;
-    mregisters[dest]= mregisters[dest]+sourceValue;
+    var mregdest = registers[dest];
+    addCheck = mregisters[mregdest]+sourceValue;
+    mregisters[mregdest]= mregisters[mregdest]+sourceValue;
   }
   //check for the value of flags
   if(addCheck == 0){
@@ -430,7 +432,7 @@ function cmp(second, third, fourth, fifth){
     nflg = 0;
   }
   }
-  function addc(second, third, fourth, fifth){
+function addc(second, third, fourth, fifth){
 
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
@@ -444,7 +446,8 @@ function cmp(second, third, fourth, fifth){
       sourceValue = registers[source];
   }
   else if(as == 1){
-      sourceValue = mregisters[source];
+    var mregsource = registers[source];
+      sourceValue = mregisters[mregsource];
   }
   else if(as == 2){
       sourceValue = source;
@@ -457,8 +460,9 @@ function cmp(second, third, fourth, fifth){
     registers[dest] = registers[dest]+sourceValue+cflg;
   }
   else if(ad == 1){
-    addCheck = mregisters[dest]+sourceValue+cflg;
-    mregisters[dest]= mregisters[dest]+sourceValue+cflg;
+    var mregdest = registers[dest];
+    addCheck = mregisters[mregdest]+sourceValue+cflg;
+    mregisters[mregdest]= mregisters[mregdest]+sourceValue+cflg;
   }
   //check for the value of flags
   if(addCheck == 0){
@@ -480,7 +484,7 @@ function cmp(second, third, fourth, fifth){
     nflg = 0;
   }
   }
-  function inv(second, third, fourth, fifth){
+function inv(second, third, fourth, fifth){
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
   var ad = Math.abs(fourth % 2);
@@ -629,7 +633,8 @@ else{
 registers[dest] = sourceValueShifted;
 }
 else if(ad == 1){
-  sourceValue= mregisters[dest];
+  var mregdest = registers[dest];
+  sourceValue= mregisters[mregdest];
   if(sourceValue > 0){
     var oddCheckPositive = sourceValue % 2;
     if(oddCheckPositive != 0){                                                        //If its odd
@@ -651,8 +656,9 @@ else if(ad == 1){
   }
   }
   else{
-  mregisters[dest] = 0;
-}
+  var mregdest = registers[dest];
+  mregisters[mregdest] = 0;
+  }
   registers[dest];
 }
 }
@@ -683,7 +689,8 @@ if(ad == 1){
   else if(checkOdd == 0){                                                       //if its even
     sourceValueShifted = sourceValue >>> 1;
   }
-  mregisters[dest]=sourceValueShifted;
+  var mregdest = registers[dest];
+  mregisters[mregdest]=sourceValueShifted;
 }
 }
 function call(second, third, fourth, fifth){
