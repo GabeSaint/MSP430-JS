@@ -178,8 +178,7 @@ function getStringBits(regValue){
 var regBit;
 if(regValue < 0){
   regBit = (regValue>>>0).toString;
-  regBit = regBit.slice(17,32);
-  regBit = "1"+regBit;
+
 }
 else{
    regBit = regValue.toString(2);
