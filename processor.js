@@ -177,8 +177,9 @@ function showRegisters(){
 function getStringBits(regValue){
 var regBit;
 if(regValue < 0){
-  regBit = (regValue>>>0).toString;
-
+  regBit = (regValue>>>0).toString(2);
+  regBit = regBit.slice(17,32);
+  regBit = "1"+regBit;
 }
 else{
    regBit = regValue.toString(2);
