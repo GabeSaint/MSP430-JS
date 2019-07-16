@@ -824,21 +824,21 @@ function stackUpdate(stackPointer){
   
   }
     
-  if else(stackPointer == 1){
+  else if(stackPointer == 1){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='inline';
     document.getElementById("stackbits2IND").style.display='none';
     document.getElementById("stackbits3IND").style.display='none';
   }
   
-  if else(stackPointer == 2){
+  else if(stackPointer == 2){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='inline';
     document.getElementById("stackbits3IND").style.display='none';
   }
   
-  if else(stackPointer == 3){
+  else if(stackPointer == 3){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='none';
