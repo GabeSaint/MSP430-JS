@@ -706,6 +706,7 @@ if(ad == 0){
     lineValue = registers[dest];
     //We need to take the last 4 values of the stack
     stack.splice(0,1);
+    stackUpdate(stackPointer);
 
 
   }
@@ -716,6 +717,7 @@ if(ad == 0){
     //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
     lineValue = mregisters[dest];
     stackPointer++;
+    stackUpdate(stackPointer);
   }
 }
 
@@ -728,7 +730,7 @@ if(stackPointer == 3){
   lineValue = mregisters[dest];
   //We need to take the last 4 values of the stack
   stack.splice(0,1);
-
+stackUpdate(stackPointer);
 
 }
 else{
@@ -738,6 +740,7 @@ else{
   //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
   lineValue = mregisters[dest];
   stackPointer++;
+  stackUpdate(stackPointer);
 }
 
 }
@@ -746,13 +749,16 @@ return lineValue;
 function ret(lineValue){
 if(stackPointer == -1){
   alert("Nothing in stack")
+  stackUpdate(stackPointer);
 }
 else {
 
 lineValue = stack[stackPointer];
 stack.splice(stackPointer,1);
 stackPointer--;
+  stackUpdate(stackPointer);
 return lineValue;
+  
 }
 }
 function jmz(second,lineValue){
