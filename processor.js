@@ -813,3 +813,44 @@ else if (second > 127){
 lineValue = lineValue + second;
 return lineValue;
 }
+
+function stackUpdate(stackPointer){
+
+  if (stackPointer == 0){
+    document.getElementById("stackbits0IND").style.display='inline';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  
+  }
+    
+  if else(stackPointer == 1){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='inline';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
+  
+  if else(stackPointer == 2){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='inline';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
+  
+  if else(stackPointer == 3){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='inline';
+  }
+  else{
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  alert("Something was missed)
+  }
+  
+
+}
