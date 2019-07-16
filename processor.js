@@ -849,7 +849,7 @@ function stackUpdate(stackPointer){
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='none';
     document.getElementById("stackbits3IND").style.display='none';
-  alert("Something was missed)
+  alert("Something was missed");
   }
   
 
