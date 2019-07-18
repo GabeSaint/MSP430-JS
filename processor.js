@@ -923,11 +923,11 @@ function machineCoder(first, second, third, fourth, fifth){
   }
 // Above adds the first 4 bits based off the instruction
 // Next we convert each following value to bits then append
-  machineLine = machineLine.concat(second.toString(2)); // Register
-  machineLine = machineLine.concat(third.toString(2)); // Register
+  machineLine = machineLine.concat(second.toString(2)+" "); // Register
+  machineLine = machineLine.concat(third.toString(2)+" "); // Register
   machineLine = machineLine.concat(" X "); // 4th bit is Xed out
-  machineLine = machineLine.concat(fourth.toString(2));
-  machineLine = machineLine.concat(fifth.toString(2));
+  machineLine = machineLine.concat(fourth.toString(2)+" ");
+  machineLine = machineLine.concat(fifth.toString(2)+" ");
 // Values have been converted
 // Append
 $("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
