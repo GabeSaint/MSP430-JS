@@ -79,10 +79,12 @@ for (var i = 0; i <line_count; i++) {
       var fourth = parseInt(split_code[3]);
       var fifth = parseInt(split_code[4]);
       i = processor(first, second, third, fourth, fifth, i);
+      machineCoder(first, second, third, fourth, fifth);
     }
     else{
 
     }
+
 }
 showRegisters();
 }
@@ -129,7 +131,7 @@ function showRegisters(){
   document.getElementById("register15bits").innerHTML = getStringBits(registers[15]);
 
 // Show Decimal Value - for memory
-
+/*
   document.getElementById("mregister0res").innerHTML = mregisters[0];
   document.getElementById("mregister1res").innerHTML = mregisters[1];
   document.getElementById("mregister2res").innerHTML = mregisters[2];
@@ -165,7 +167,7 @@ function showRegisters(){
   document.getElementById("mregister13bits").innerHTML = mregisters[13].toString(2);
   document.getElementById("mregister14bits").innerHTML = mregisters[14].toString(2);
   document.getElementById("mregister15bits").innerHTML = mregisters[15].toString(2);
-
+*/
 // Stack Output
 
   document.getElementById("stackbits0").innerHTML = stack[3];
@@ -758,7 +760,7 @@ stack.splice(stackPointer,1);
 stackPointer--;
   stackUpdate(stackPointer);
 return lineValue;
-  
+
 }
 }
 function jmz(second,lineValue){
@@ -827,23 +829,23 @@ function stackUpdate(stackPointer){
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='none';
     document.getElementById("stackbits3IND").style.display='none';
-  
+
   }
-    
+
   else if(stackPointer == 1){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='inline';
     document.getElementById("stackbits2IND").style.display='none';
     document.getElementById("stackbits3IND").style.display='none';
   }
-  
+
   else if(stackPointer == 2){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='inline';
     document.getElementById("stackbits3IND").style.display='none';
   }
-  
+
   else if(stackPointer == 3){
     document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='none';
@@ -857,6 +859,76 @@ function stackUpdate(stackPointer){
     document.getElementById("stackbits3IND").style.display='none';
   alert("Something was missed");
   }
-  
 
+
+}
+
+function machineCoder(first, second, third, fourth, fifth){
+  var machineLine = "";
+
+  if(first == "MOV"){
+    machineLine = machineLine.concat("0000 ");
+  }
+  else if(first == "CMP"){
+    machineLine = machineLine.concat("0001 ");
+  }
+  else if(first == "ADD"){
+    machineLine = machineLine.concat("0010 ");
+  }
+  else if(first == "ADDC"){
+    machineLine = machineLine.concat("0011 ");
+  }
+  else if(first == "INV"){
+    machineLine = machineLine.concat("0100 ");
+  }
+  else if(first == "OR"){
+    machineLine = machineLine.concat("0101 ");
+  }
+  else if(first == "XOR"){
+    machineLine = machineLine.concat("0110 ");
+  }
+  else if(first == "AND"){
+    machineLine = machineLine.concat("0111 ");
+  }
+  else if(first == "RRC"){
+    machineLine = machineLine.concat("1000 ");
+  }
+  else if(first == "RRA"){
+    machineLine = machineLine.concat("1001 ");
+  }
+  else if(first == "CALL"){
+    machineLine = machineLine.concat("1010 ");
+  }
+  else if(first == "RET"){
+    machineLine = machineLine.concat("1011 ");
+  }
+  else if(first == "JMZ"){
+    machineLine = machineLine.concat("1100 ");
+  }
+  else if(first == "JMC"){
+    machineLine = machineLine.concat("1101 ");
+  }
+  else if(first == "JMN"){
+    machineLine = machineLine.concat("1110 ");
+  }
+  else if(first == "JMU"){
+    machineLine = machineLine.concat("1111 ");
+  }
+  else if(first == "ALERT"){
+    machineLine = machineLine.concat("001");
+  }
+  else{
+    var text = "Unknown operation detected at "+ lineValue;
+    alert(text);
+  }
+// Above adds the first 4 bits based off the instruction
+// Next we convert each following value to bits then append
+  machineLine = machineLine.concat(second.toString(2)); // Register
+  machineLine = machineLine.concat(third.toString(2)); // Register
+  machineLine = machineLine.concat(" X "); // 4th bit is Xed out
+  machineLine = machineLine.concat(fourth.toString(2));
+  machineLine = machineLine.concat(fifth.toString(2));
+// Values have been converted
+// Append
+$("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
 }
