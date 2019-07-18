@@ -79,6 +79,7 @@ for (var i = 0; i <line_count; i++) {
       var fourth = parseInt(split_code[3]);
       var fifth = parseInt(split_code[4]);
       i = processor(first, second, third, fourth, fifth, i);
+      $("#machineDisplay").html(""); // Clear Contents
       machineCoder(first, second, third, fourth, fifth);
     }
     else{
