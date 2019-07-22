@@ -95,7 +95,7 @@ showRegisters();
 
 function showRegisters(){
   if(stackPointer == -1){
-    document.getElementById("stackbits0IND").style.display="nothing here yet";
+    document.getElementById("stackbits0IND").style.display='none';
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='none';
     document.getElementById("stackbits3IND").style.display='none';
