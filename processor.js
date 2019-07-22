@@ -16,7 +16,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 
 var registers = new Int16Array(16);                                                                     // register variables
 var mregisters = new Int16Array(256);
-var stack = [];
+var stack = [0, 0 ,0 ,0, 0 ,0];
 var stackPointer = -1;                                                          // memory register variables
 
 //Fill registers with random numbers
