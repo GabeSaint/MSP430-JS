@@ -57,7 +57,7 @@ if(/\S/.test(program)){
   var fourth = parseInt(split_code[3]);
   var fifth = parseInt(split_code[4]);
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  document.getElementById("topLevel").innerHTML = "register 0 is " + registers[0]
+  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue + 1;
   lineValue++;
 }
 else {
