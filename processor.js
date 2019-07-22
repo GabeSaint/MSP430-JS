@@ -41,7 +41,7 @@ for(var i = 0; i < 16; i++){
 }
 stack.splice(0,4);
 stackPointer = -1;
-lineValue = 0; 
+lineValue = 0;
 showRegisters();
 }
 
@@ -58,7 +58,7 @@ if(/\S/.test(program)){
   var fourth = parseInt(split_code[3]);
   var fifth = parseInt(split_code[4]);
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  programCounter = lineValue + 1;
+  var programCounter = lineValue + 1;
   document.getElementById("topLevel").innerHTML = "Program Counter is " + programCounter;
   lineValue++;
 }
