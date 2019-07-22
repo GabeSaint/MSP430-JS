@@ -826,8 +826,14 @@ return lineValue;
 }
 
 function stackUpdate(stackPointer){
+  if(stackPointer == -1){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
 
-  if (stackPointer == 0){
+  else if (stackPointer == 0){
     document.getElementById("stackbits0IND").style.display='inline';
     document.getElementById("stackbits1IND").style.display='none';
     document.getElementById("stackbits2IND").style.display='none';
