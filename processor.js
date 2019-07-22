@@ -720,7 +720,7 @@ if(ad == 0){
     //To the value in stack aswell to show the line number in the codemirror
     stack[stackPointer+1]=lineValue+1;
     //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-    lineValue = mregisters[dest];
+    lineValue = registers[dest];
     stackPointer++;
     stackUpdate(stackPointer);
   }
@@ -732,7 +732,7 @@ if(stackPointer == 3){
   //To the value in stack aswell to show the line number in the codemirror
   stack[stackPointer+1]=lineValue+1;
   //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-  lineValue = mregisters[dest];
+  lineValue = mregisters[registers[dest]];
   //We need to take the last 4 values of the stack
   stack.splice(0,1);
 stackUpdate(stackPointer);
@@ -743,7 +743,7 @@ else{
   //To the value in stack aswell to show the line number in the codemirror
   stack[stackPointer+1]=lineValue+1;
   //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-  lineValue = mregisters[dest];
+  lineValue = mregisters[registers[dest]];
   stackPointer++;
   stackUpdate(stackPointer);
 }
