@@ -36,7 +36,7 @@ function clearRegisters(){                                                      
 for(var i = 0; i < 16; i++){
   registers[i] = 0
 }
-for(var i = 0; i < 256; i++){
+for(var i = 0; i < 16; i++){
   mregisters[i] = 0
 }
 stack.splice(0,4);
@@ -557,7 +557,7 @@ function inv(second, third, fourth, fifth){
   }
   else if(ad == 1){
     var mregdest = registers[dest]
-    mregisters[mregdest]= ~sourceValue;
+    mregisters[dest]= ~sourceValue;
   }
 }
 function or(second, third, fourth, fifth){
@@ -586,7 +586,7 @@ function or(second, third, fourth, fifth){
     }
     else if(ad == 1){
       var mregdest = registers[dest];
-      mregisters[mregdest]= mregisters[mregdest]|sourceValue;
+      mregisters[dest]= mregisters[mregdest]|sourceValue;
     }
   }
 function xor(second, third, fourth, fifth){
@@ -615,7 +615,7 @@ function xor(second, third, fourth, fifth){
     }
     else if(ad == 1){
       var mregdest = register[dest];
-      mregisters[mregdest]= mregisters[mregdest]^sourceValue;
+      mregisters[dest]= mregisters[mregdest]^sourceValue;
     }
 }
 function and(second, third, fourth, fifth){
@@ -644,7 +644,7 @@ function and(second, third, fourth, fifth){
   }
   else if(ad == 1){
     var mregdest = registers[dest];
-    mregisters[mregdest]= mregisters[mregdest]&sourceValue;
+    mregisters[dest]= mregisters[mregdest]&sourceValue;
   }
 }
 function rrc(second, third){
@@ -794,19 +794,19 @@ else{
 return lineValue;
 }
 function ret(lineValue){
-  if(stackPointer == -1){
-    alert("Nothing in stack")
-    stackUpdate(stackPointer);
-  }
-  else {
+if(stackPointer == -1){
+  alert("Nothing in stack")
+  stackUpdate(stackPointer);
+}
+else {
 
-    lineValue = stack[stackPointer];
-    stack.splice(stackPointer,1);
-    stackPointer--;
-      stackUpdate(stackPointer);
-    return lineValue;
+lineValue = stack[stackPointer];
+stack.splice(stackPointer,1);
+stackPointer--;
+  stackUpdate(stackPointer);
+return lineValue;
 
-  }
+}
 }
 function jmz(second,lineValue){
 if(second < -128){
