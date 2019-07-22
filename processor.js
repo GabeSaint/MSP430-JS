@@ -17,7 +17,8 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 var registers = new Int16Array(16);                                                                     // register variables
 var mregisters = new Int16Array(256);
 var stack = [];
-var stackPointer = -1;                                                          // memory register variables
+var stackPointer = -1;
+document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;                                                         // memory register variables
 
 //Fill registers with random numbers
 for(var i = 0; i < 16; i++){
@@ -58,12 +59,12 @@ if(/\S/.test(program)){
   var fourth = parseInt(split_code[3]);
   var fifth = parseInt(split_code[4]);
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  var programCounter = lineValue + 1;
-  document.getElementById("topLevel").innerHTML = "Program Counter is " + programCounter;
   lineValue++;
+  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
 }
 else {
   lineValue++;
+  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
 }
 showRegisters();
 }
@@ -666,7 +667,7 @@ else if(ad == 1){
   var mregdest = registers[dest];
   mregisters[mregdest] = 0;
   }
-  registers[dest];
+
 }
 }
 function rra(second, third, fourth, fifth){
