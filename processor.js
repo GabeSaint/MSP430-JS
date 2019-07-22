@@ -40,6 +40,7 @@ for(var i = 0; i < 16; i++){
   mregisters[i] = 0
 }
 stack.splice(0,4);
+stackPointer = -1;
 showRegisters();
 }
 
