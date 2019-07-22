@@ -110,10 +110,10 @@ function showRegisters(){
   }
 
   else if(stackPointer == 1){
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='inline';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='none';
+    document.getElementById("stackbits0IND").innerHTML = "undefined";
+    document.getElementById("stackbits1IND").innerHTML = "undefined";
+    document.getElementById("stackbits2IND").innerHTML = "undefined";
+    document.getElementById("stackbits3IND").innerHTML = "undefined";
   }
 
   else if(stackPointer == 2){
