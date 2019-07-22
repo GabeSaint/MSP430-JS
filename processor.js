@@ -515,7 +515,7 @@ function inv(second, third, fourth, fifth){
   }
   else if(ad == 1){
     var mregdest = registers[dest]
-    mregisters[dest]= ~sourceValue;
+    mregisters[mregdest]= ~sourceValue;
   }
 }
 function or(second, third, fourth, fifth){
@@ -544,7 +544,7 @@ function or(second, third, fourth, fifth){
     }
     else if(ad == 1){
       var mregdest = registers[dest];
-      mregisters[dest]= mregisters[mregdest]|sourceValue;
+      mregisters[mregdest]= mregisters[mregdest]|sourceValue;
     }
   }
 function xor(second, third, fourth, fifth){
@@ -573,7 +573,7 @@ function xor(second, third, fourth, fifth){
     }
     else if(ad == 1){
       var mregdest = register[dest];
-      mregisters[dest]= mregisters[mregdest]^sourceValue;
+      mregisters[mregdest]= mregisters[mregdest]^sourceValue;
     }
 }
 function and(second, third, fourth, fifth){
@@ -602,7 +602,7 @@ function and(second, third, fourth, fifth){
   }
   else if(ad == 1){
     var mregdest = registers[dest];
-    mregisters[dest]= mregisters[mregdest]&sourceValue;
+    mregisters[mregdest]= mregisters[mregdest]&sourceValue;
   }
 }
 function rrc(second, third){
@@ -633,10 +633,10 @@ else if(sourceValue < 0){
   }
 }
 else{
-  registers[dest] = 0;
-}
-registers[dest] = sourceValueShifted;
-}
+    registers[dest] = 0;
+  }
+  registers[dest] = sourceValueShifted;
+  }
 else if(ad == 1){
   var mregdest = registers[dest];
   sourceValue= mregisters[mregdest];
@@ -743,7 +743,7 @@ else{
   //To the value in stack aswell to show the line number in the codemirror
   stack[stackPointer+1]=lineValue+1;
   //We need to take the Value of whats in the register - 1 because codemirror does not have a line 0
-  lineValue = mregisters[dest];
+  lineValue = mregisters[registers[dest]];
   stackPointer++;
   stackUpdate(stackPointer);
 }
