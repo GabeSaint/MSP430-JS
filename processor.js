@@ -57,7 +57,7 @@ if(/\S/.test(program)){
   var fourth = parseInt(split_code[3]);
   var fifth = parseInt(split_code[4]);
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  document.getElementById("topLevel").innerHTML = "register 0 is " + registers[0]
+  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
   lineValue++;
 }
 else {
@@ -94,6 +94,48 @@ showRegisters();
 
 
 function showRegisters(){
+  if(stackPointer == -1){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
+
+  else if (stackPointer == 0){
+    document.getElementById("stackbits0IND").style.display='inline';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+
+  }
+
+  else if(stackPointer == 1){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='inline';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
+
+  else if(stackPointer == 2){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='inline';
+    document.getElementById("stackbits3IND").style.display='none';
+  }
+
+  else if(stackPointer == 3){
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='inline';
+  }
+  else{
+    document.getElementById("stackbits0IND").style.display='none';
+    document.getElementById("stackbits1IND").style.display='none';
+    document.getElementById("stackbits2IND").style.display='none';
+    document.getElementById("stackbits3IND").style.display='none';
+  alert("Something was missed");
+  }
 
     // Show Decimal Value
 
@@ -826,51 +868,9 @@ return lineValue;
 }
 
 function stackUpdate(stackPointer){
-  if(stackPointer == -1){
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='none';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='none';
-  }
-
-  else if (stackPointer == 0){
-    document.getElementById("stackbits0IND").style.display='inline';
-    document.getElementById("stackbits1IND").style.display='none';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='none';
-
-  }
-
-  else if(stackPointer == 1){
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='inline';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='none';
-  }
-
-  else if(stackPointer == 2){
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='none';
-    document.getElementById("stackbits2IND").style.display='inline';
-    document.getElementById("stackbits3IND").style.display='none';
-  }
-
-  else if(stackPointer == 3){
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='none';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='inline';
-  }
-  else{
-    document.getElementById("stackbits0IND").style.display='none';
-    document.getElementById("stackbits1IND").style.display='none';
-    document.getElementById("stackbits2IND").style.display='none';
-    document.getElementById("stackbits3IND").style.display='none';
-  alert("Something was missed");
-  }
-
-
 }
+
+
 
 function machineCoder(first, second, third, fourth, fifth){
   var machineLine = "";
