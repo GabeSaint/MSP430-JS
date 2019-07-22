@@ -51,13 +51,26 @@ function stepForward(){
 var program = editor.doc.getLine(lineValue);
 
 if(/\S/.test(program)){
-  var split_code = program.split(" ",5);
+  var split_code = program.split(" ",6);
   var first = split_code[0];
+
   first = first.toUpperCase();
   var second = parseInt(split_code[1]);
+  if(typeof second == "undefined"){
+    second = 0;
+  }
   var third = parseInt(split_code[2]);
+  if(typeof third == "undefined"){
+    third = 0;
+  }
   var fourth = parseInt(split_code[3]);
+  if(typeof fourth == "undefined"){
+    fourth = 0;
+  }
   var fifth = parseInt(split_code[4]);
+  if(typeof fifth == "undefined"){
+    fifth = 0;
+  }
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
   lineValue++;
   document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
@@ -81,9 +94,21 @@ for (var i = 0; i <line_count; i++) {
 
       first = first.toUpperCase();
       var second = parseInt(split_code[1]);
+      if(typeof second == "undefined"){
+        second = 0;
+      }
       var third = parseInt(split_code[2]);
+      if(typeof third == "undefined"){
+        third = 0;
+      }
       var fourth = parseInt(split_code[3]);
+      if(typeof fourth == "undefined"){
+        fourth = 0;
+      }
       var fifth = parseInt(split_code[4]);
+      if(typeof fifth == "undefined"){
+        fifth = 0;
+      }
       i = processor(first, second, third, fourth, fifth, i);
       machineCoder(first, second, third, fourth, fifth);
     }
