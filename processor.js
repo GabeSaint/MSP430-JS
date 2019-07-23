@@ -43,7 +43,8 @@ for(var i = 0; i < 16; i++){
 stack.splice(0,4);
 stackPointer = -1;
 lineValue = 0;
-cm.swapDoc(doc: Codemirror.Doc);
+cm.setValue("");
+cm.clearHistory();
 showRegisters();
 }
 
