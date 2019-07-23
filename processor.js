@@ -2,7 +2,7 @@ var zflg = 0;
 var cflg = 0;
 var nflg = 0;
 var lineValue = 0;
-var flags = [0,0,0];
+var flags = ["0","0","0"];
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   indentUnit: 0,
