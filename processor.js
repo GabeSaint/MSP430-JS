@@ -2,9 +2,9 @@ var zflg = 0;
 var cflg = 0;
 var nflg = 0;
 
-document.getElementById("CflagC").innerHTML = scflg;
-document.getElementById("ZflagZ").innerHTML = szflg;
-document.getElementById("NflagN").innerHTML = snflg;
+document.getElementById("CflagC").innerHTML = cflg;
+document.getElementById("ZflagZ").innerHTML = zflg;
+document.getElementById("NflagN").innerHTML = nflg;
 var lineValue = 0;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
