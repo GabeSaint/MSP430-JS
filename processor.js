@@ -1,6 +1,10 @@
 var zflg = 0;
 var cflg = 0;
 var nflg = 0;
+
+document.getElementById("CflagC").innerHTML = scflg;
+document.getElementById("ZflagZ").innerHTML = szflg;
+document.getElementById("NflagN").innerHTML = snflg;
 var lineValue = 0;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -48,7 +52,7 @@ editor.doc.clearHistory();
 cflg = 0;
 nflg = 0;
 zflg = 0;
-showRegisters(cflg, zflg, nflg);
+showRegisters());
 }
 
 function stepForward(){
@@ -214,9 +218,7 @@ function showRegisters(){
   document.getElementById("stackbits3").innerHTML = stack[0];
 
 
-  document.getElementById("CflagC").innerHTML = scflg;
-  document.getElementById("ZflagZ").innerHTML = szflg;
-  document.getElementById("NflagN").innerHTML = snflg;
+
 
 
 
