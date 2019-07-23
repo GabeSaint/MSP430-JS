@@ -1,6 +1,6 @@
-var zflg;
-var cflg;
-var nflg;
+var zflg = 0;
+var cflg = 0;
+var nflg = 0;
 var lineValue = 0;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
