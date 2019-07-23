@@ -131,7 +131,7 @@ function showRegisters(){
     // Show Decimal Value
   var scflg = cflg;
   var snflg = nflg;
-  var szflg = zlfg;
+  var szflg = zflg;
   document.getElementById("register0res").innerHTML = registers[0];
   document.getElementById("register1res").innerHTML = registers[1];
   document.getElementById("register2res").innerHTML = registers[2];
