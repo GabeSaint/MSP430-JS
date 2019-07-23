@@ -48,6 +48,9 @@ stackPointer = -1;
 lineValue = 0;
 editor.doc.setValue("");
 editor.doc.clearHistory();
+cflg = 0;
+nflg = 0;
+zflg = 0;
 showRegisters();
 }
 
