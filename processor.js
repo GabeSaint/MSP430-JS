@@ -2,7 +2,7 @@ var zflg = 0;
 var cflg = 0;
 var nflg = 0;
 var lineValue = 0;
-var flags = ["0","0","0"];
+
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   indentUnit: 0,
@@ -34,19 +34,21 @@ mregisters[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 showRegisters();
 
 function clearRegisters(){                                                               //clears all registers and resets linecounter                                                      //var for what line we read
-    for(var i = 0; i < 16; i++){
-      registers[i] = 0
-    }
-    for(var i = 0; i < 16; i++){
-      mregisters[i] = 0
-    }
-    stack.splice(0,4);
-    stackPointer = -1;
-    lineValue = 0;
-    editor.doc.setValue("");
-    editor.doc.clearHistory();
-    flags = [0,0,0]
-    showRegisters();
+for(var i = 0; i < 16; i++){
+  registers[i] = 0
+}
+for(var i = 0; i < 16; i++){
+  mregisters[i] = 0
+}
+stack.splice(0,4);
+stackPointer = -1;
+lineValue = 0;
+editor.doc.setValue("");
+editor.doc.clearHistory();
+cflg = 0;
+nflg = 0;
+zflg = 0;
+showRegisters();
 }
 
 function stepForward(){
@@ -210,9 +212,9 @@ function showRegisters(){
   document.getElementById("stackbits3").innerHTML = stack[0];
 
 
-  document.getElementById("CflagC").innerHTML = flags[0];
-  document.getElementById("ZflagZ").innerHTML = flags[1];
-  document.getElementById("NflagN").innerHTML = flags[2];
+  document.getElementById("CflagC").innerHTML = cflg;
+  document.getElementById("ZflagZ").innerHTML = zflg;
+  document.getElementById("NflagN").innerHTML = nflg;
 
 
 
@@ -314,19 +316,15 @@ if(as == 0){
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
-      flags[2] = 1;
     }
     else {
       zflg = 0;
-      flags[2] = 0;
     }
     if(sourceValue < 0){
       nflg = 1;
-      flags[1]=1;
     }
     else{
       nflg = 0;
-      flags[1] = 0;
     }
 }
 else if(as == 1){
@@ -335,47 +333,37 @@ else if(as == 1){
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
-      flags[2] = 1;
     }
     else {
       zflg = 0;
-      flags[2] = 0;
     }
     if(sourceValue < 0){
       nflg = 1;
-      flags[1] = 1;
     }
     else{
       nflg = 0;
-      flags[1] = 0;
     }
 }
 else if(as == 2){
     sourceValue = source;
     nflg = 0;
-    flags[1] = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
-      flags[2] = 1;
     }
     else {
       zflg = 0;
-      flags[2] = 0;
     }
 }
 else if(as == 3){
     sourceValue = source*17;
     nflg = 0;
-    flags[1] = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
       zflg = 1;
-      flags[2] = 1;
     }
     else {
       zflg = 0;
-      flags[2] = 0;
     }
 }
 if(ad == 0){
@@ -422,27 +410,21 @@ function cmp(second, third, fourth, fifth){
   //check if value is zero or negative
   if(compareValue == 0){
     zflg = 1;
-    flags[2] = 1;
   }
   else {
     zflg = 0;
-    flags[2] = 0;
   }
   if(compareValue < 0){
     nflg = 1;
-    flags[1] = 1;
   }
   else {
     nflg = 0;
-    flags[1] = 0;
   }
   if(compareCarryCheck > 65535){
     cflg = 1;
-    flags[0] = 1;
   }
   else{
     cflg = 0;
-    flags[0] = 0;
   }
   }
 function add(second, third, fourth, fifth){
@@ -479,27 +461,21 @@ function add(second, third, fourth, fifth){
   //check for the value of flags
   if(addCheck == 0){
     zflg = 1;
-    flags[2] = 1;
   }
   else {
     zflg = 0;
-    flags[2] = 0;
   }
   if(addCheck > 32767 || addCheck < -32768){
     cflg = 1;
-    flags[0] = 1;
   }
   else {
     cflg = 0;
-    flags[0] = 0;
   }
   if(addCheck < 0){
     nflg = 1;
-    flags[1] = 1;
   }
   else {
     nflg = 0;
-    flags[1] = 0;
   }
   }
 function addc(second, third, fourth, fifth){
@@ -537,27 +513,21 @@ function addc(second, third, fourth, fifth){
   //check for the value of flags
   if(addCheck == 0){
     zflg = 1;
-    flags[2] = 1;
   }
   else {
     zflg = 0;
-    flags[2] = 0;
   }
   if(addCheck > 32767 || addCheck < -32768){
     cflg = 1;
-    flags[0] = 1;
   }
   else {
     cflg = 0;
-    flags[0] = 0;
   }
   if(addCheck < 0){
     nflg = 1;
-    flags[1] = 1;
   }
   else {
     nflg = 0;
-    flags[1] = 0;
   }
   }
 function inv(second, third, fourth, fifth){
@@ -846,7 +816,7 @@ else if (second > 127){
   second = second % 127;
 }
 var lineValue = lineValue;
-if(flags[2] == 1){
+if(zflg == 1){
   lineValue = lineValue + second;
 }
 else{
@@ -862,7 +832,7 @@ else if (second > 127){
   second = second % 127;
 }
 var lineValue = lineValue;
-if(flags[0] == 1){
+if(cflg == 1){
   lineValue = lineValue + second;
 }
 else{
@@ -878,7 +848,7 @@ else if (second > 127){
   second = second % 127;
 }
 var lineValue = lineValue;
-if(flags[1] == 1){
+if(nflg == 1){
   lineValue = lineValue + second;
 }
 else{
