@@ -126,6 +126,7 @@ for (var i = 0; i <line_count; i++) {
 
 }
 showRegisters();
+  spareFlags();
 }
 
 
@@ -212,11 +213,8 @@ function showRegisters(){
   document.getElementById("stackbits0").innerHTML = stack[3];
   document.getElementById("stackbits1").innerHTML = stack[2];
   document.getElementById("stackbits2").innerHTML = stack[1];
-  document.getElementById("stackbits3").innerHTML = stack[0];
-  
-  document.getElementById("CflagC").innerHTML = cflg;
-  document.getElementById("ZflagZ").innerHTML = zflg;
-  document.getElementById("NflagN").innerHTML = nflg;
+  document.getElementById("stackbits3").innerHTML = stack[0]; 
+
   
   
 }
@@ -976,4 +974,11 @@ function machineCoder(first, second, third, fourth, fifth){
 // Values have been converted
 // Append
 $("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
+}
+
+function spareFlags(){
+  document.getElementById("CflagC").innerHTML = cflg;
+  document.getElementById("ZflagZ").innerHTML = zflg;
+  document.getElementById("NflagN").innerHTML = nflg;
+
 }
