@@ -84,7 +84,7 @@ else {
   lineValue++;
   document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 }
-showRegisters(cflg, zflg, nflg);
+showRegisters();
 }
 
 function submit(){
@@ -122,15 +122,16 @@ for (var i = 0; i <line_count; i++) {
     }
 
 }
-showRegisters(cflg, zflg, nflg)
-spareFlags(cflg,zflg,nflg);
+showRegisters();
 }
 
 
-function showRegisters(cflg, zflg, nflg){
+function showRegisters(){
 
     // Show Decimal Value
-
+  var scflg = cflg;
+  var snflg = nflg;
+  var szflg = zlfg;
   document.getElementById("register0res").innerHTML = registers[0];
   document.getElementById("register1res").innerHTML = registers[1];
   document.getElementById("register2res").innerHTML = registers[2];
@@ -210,15 +211,15 @@ function showRegisters(cflg, zflg, nflg){
   document.getElementById("stackbits0").innerHTML = stack[3];
   document.getElementById("stackbits1").innerHTML = stack[2];
   document.getElementById("stackbits2").innerHTML = stack[1];
-  document.getElementById("stackbits3").innerHTML = stack[0]; 
-  
-  
-  document.getElementById("CflagC").innerHTML = cflg;
-  document.getElementById("ZflagZ").innerHTML = zflg;
-  document.getElementById("NflagN").innerHTML = nflg;
+  document.getElementById("stackbits3").innerHTML = stack[0];
 
-  
-  
+
+  document.getElementById("CflagC").innerHTML = scflg;
+  document.getElementById("ZflagZ").innerHTML = szflg;
+  document.getElementById("NflagN").innerHTML = snflg;
+
+
+
 }
 
 function getStringBits(regValue){
@@ -977,7 +978,3 @@ function machineCoder(first, second, third, fourth, fifth){
 // Append
 $("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
 }
-
-
-
-
