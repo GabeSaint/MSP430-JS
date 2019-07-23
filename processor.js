@@ -1,6 +1,6 @@
 var zflg;
 var cflg;
-var nflag;
+var nflg;
 var lineValue = 0;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -18,7 +18,7 @@ var registers = new Int16Array(16);                                             
 var mregisters = new Int16Array(256);
 var stack = [];
 var stackPointer = -1;
-document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;                                                         // memory register variables
+document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;                                                         // memory register variables
 
 //Fill registers with random numbers
 for(var i = 0; i < 16; i++){
@@ -75,11 +75,11 @@ if(/\S/.test(program)){
   }
   lineValue = processor(first, second, third, fourth, fifth, lineValue);
   lineValue++;
-  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
+  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 }
 else {
   lineValue++;
-  document.getElementById("topLevel").innerHTML = "Program Counter is " + lineValue;
+  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 }
 showRegisters();
 }
@@ -207,6 +207,12 @@ function showRegisters(){
   document.getElementById("stackbits1").innerHTML = stack[2];
   document.getElementById("stackbits2").innerHTML = stack[1];
   document.getElementById("stackbits3").innerHTML = stack[0];
+  
+  document.getElementById("CflagC").innerHTML = cflg;
+  document.getElementById("ZflagZ").innerHTML = zflg;
+  document.getElementById("NflagN").innerHTML = nflg;
+  
+  
 }
 
 function getStringBits(regValue){
