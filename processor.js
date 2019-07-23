@@ -2,9 +2,6 @@ var zflg = 0;
 var cflg = 0;
 var nflg = 0;
 var lineValue = 0;
-if(typeof cflg == "undefined"){
-  alert("flags are undefined");
-}
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
@@ -34,7 +31,7 @@ for(var i = 0; i < 256; i++){
 var randomNeg = Math.floor((Math.random()*3)+1)
 mregisters[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 }
-showRegisters();
+showRegisters(cflg, zflg, nflg);
 
 function clearRegisters(){                                                               //clears all registers and resets linecounter                                                      //var for what line we read
 for(var i = 0; i < 16; i++){
@@ -51,7 +48,7 @@ editor.doc.clearHistory();
 cflg = 0;
 nflg = 0;
 zflg = 0;
-showRegisters();
+showRegisters(cflg, zflg, nflg);
 }
 
 function stepForward(){
@@ -87,7 +84,7 @@ else {
   lineValue++;
   document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 }
-showRegisters();
+showRegisters(cflg, zflg, nflg);
 }
 
 function submit(){
@@ -125,12 +122,12 @@ for (var i = 0; i <line_count; i++) {
     }
 
 }
-showRegisters();
-  spareFlags();
+showRegisters(cflg, zflg, nflg)
+spareFlags(cflg,zflg,nflg);
 }
 
 
-function showRegisters(){
+function showRegisters(cflg, zflg, nflg){
 
     // Show Decimal Value
 
@@ -214,6 +211,11 @@ function showRegisters(){
   document.getElementById("stackbits1").innerHTML = stack[2];
   document.getElementById("stackbits2").innerHTML = stack[1];
   document.getElementById("stackbits3").innerHTML = stack[0]; 
+  
+  
+  document.getElementById("CflagC").innerHTML = cflg;
+  document.getElementById("ZflagZ").innerHTML = zflg;
+  document.getElementById("NflagN").innerHTML = nflg;
 
   
   
@@ -976,9 +978,6 @@ function machineCoder(first, second, third, fourth, fifth){
 $("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
 }
 
-function spareFlags(){
-  document.getElementById("CflagC").innerHTML = cflg;
-  document.getElementById("ZflagZ").innerHTML = zflg;
-  document.getElementById("NflagN").innerHTML = nflg;
 
-}
+
+
