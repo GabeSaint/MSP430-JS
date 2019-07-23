@@ -52,7 +52,7 @@ editor.doc.clearHistory();
 cflg = 0;
 nflg = 0;
 zflg = 0;
-showRegisters());
+showRegisters();
 }
 
 function stepForward(){
