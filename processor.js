@@ -48,6 +48,7 @@ editor.doc.clearHistory();
 cflg = 0;
 nflg = 0;
 zflg = 0;
+document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 showRegisters();
 }
 
