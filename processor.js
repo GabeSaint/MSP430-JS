@@ -647,7 +647,7 @@ function and(second, third, fourth, fifth){
     mregisters[mregdest]= mregisters[mregdest]&sourceValue;
   }
 }
-function rrc(second, third){
+function rra(second, third){
 var dest = Math.abs(second % 16);
 var ad = Math.abs(third % 2);
 var sourceValue;
@@ -709,7 +709,7 @@ else if(ad == 1){
 
 }
 }
-function rra(second, third, fourth, fifth){
+function rrc(second, third, fourth, fifth){
 var dest = Math.abs(second % 16);
 var ad = Math.abs(third % 2);
 var sourceValue;
