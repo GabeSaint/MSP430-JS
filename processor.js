@@ -797,6 +797,7 @@ function ret(lineValue){
 if(stackPointer == -1){
   alert("Nothing in stack")
   stackUpdate(stackPointer);
+  lineValue++;
   return lineValue;
 }
 else {
