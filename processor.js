@@ -33,23 +33,40 @@ mregisters[i] = Math.floor((Math.random()*32767)+1) * Math.pow(-1,randomNeg);
 }
 showRegisters();
 
-function clearRegisters(){                                                               //clears all registers and resets linecounter                                                      //var for what line we read
-for(var i = 0; i < 16; i++){
-  registers[i] = 0
+function clearEZ(){                                             // Clear button, resets all regsters, stacks, and flags to 0
+  for(var i = 0; i < 16; i++){
+    registers[i] = 0
+  }
+  for(var i = 0; i < 16; i++){
+    mregisters[i] = 0
+  }
+  stack.splice(0,4);
+  stackPointer = -1;
+  lineValue = 0;
+  cflg = 0;
+  nflg = 0;
+  zflg = 0;
+  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
+  showRegisters();
 }
-for(var i = 0; i < 16; i++){
-  mregisters[i] = 0
-}
-stack.splice(0,4);
-stackPointer = -1;
-lineValue = 0;
-editor.doc.setValue("");
-editor.doc.clearHistory();
-cflg = 0;
-nflg = 0;
-zflg = 0;
-document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
-showRegisters();
+
+function clearRegisters(){                                                               //Reset button, clear button but erases text area                                                      //var for what line we read
+  for(var i = 0; i < 16; i++){
+    registers[i] = 0
+  }
+  for(var i = 0; i < 16; i++){
+    mregisters[i] = 0
+  }
+  stack.splice(0,4);
+  stackPointer = -1;
+  lineValue = 0;
+  editor.doc.setValue("");
+  editor.doc.clearHistory();
+  cflg = 0;
+  nflg = 0;
+  zflg = 0;
+  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
+  showRegisters();
 }
 
 function stepForward(){
