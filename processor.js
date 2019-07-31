@@ -73,78 +73,84 @@ function stepForward(){
 
 var program = editor.doc.getLine(lineValue);
 
-if(/\S/.test(program)){
-  var split_code = program.split(" ",6);
-  var first = split_code[0];
+if(lineValue <= 255){
+  if(/\S/.test(program)){
+    var split_code = program.split(" ",6);
+    var first = split_code[0];
 
-  first = first.toUpperCase();
-  var second = parseInt(split_code[1]);
-  if(typeof second == "undefined"){
-    second = 0;
+    first = first.toUpperCase();
+    var second = parseInt(split_code[1]);
+    if(typeof second == "undefined"){
+      second = 0;
+    }
+    var third = parseInt(split_code[2]);
+    if(typeof third == "undefined"){
+      third = 0;
+    }
+    var fourth = parseInt(split_code[3]);
+    if(typeof fourth == "undefined"){
+      fourth = 0;
+    }
+    var fifth = parseInt(split_code[4]);
+    if(typeof fifth == "undefined"){
+      fifth = 0;
+    }
+    lineValue = processor(first, second, third, fourth, fifth, lineValue);
+    lineValue++;
+    document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
   }
-  var third = parseInt(split_code[2]);
-  if(typeof third == "undefined"){
-    third = 0;
+  else {
+    lineValue++;
+    document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
   }
-  var fourth = parseInt(split_code[3]);
-  if(typeof fourth == "undefined"){
-    fourth = 0;
-  }
-  var fifth = parseInt(split_code[4]);
-  if(typeof fifth == "undefined"){
-    fifth = 0;
-  }
-  lineValue = processor(first, second, third, fourth, fifth, lineValue);
-  lineValue++;
-  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
 }
-else {
-  lineValue++;
-  document.getElementById("programCounterDisplay").innerHTML = "Program Counter is " + lineValue;
+else{
+  Alert("Too many lines, MAX LINE #: 255");
 }
 showRegisters();
 }
 
 function submit(){
-$("#machineDisplay").html(""); // Clear Contents
-var line_count= editor.doc.lineCount();
-  
-  if (line_count > 255){
-    alert("Too many lines, use less code.");  
-    return;
-  } //This should detect line count and end if higher than 255
+  $("#machineDisplay").html(""); // Clear Contents
+  var line_count= editor.doc.lineCount();
 
-for (var i = 0; i <line_count; i++) {
-    var program = editor.doc.getLine(i);
-    if(/\S/.test(program)){
-      var split_code = program.split(" ",6);
-      var first = split_code[0];
+if(line_count < 255){
+  for (var i = 0; i <line_count; i++) {
+      var program = editor.doc.getLine(i);
+      if(/\S/.test(program)){
+        var split_code = program.split(" ",6);
+        var first = split_code[0];
 
-      first = first.toUpperCase();
-      var second = parseInt(split_code[1]);
-      if(typeof second == "undefined"){
-        second = 0;
+        first = first.toUpperCase();
+        var second = parseInt(split_code[1]);
+        if(typeof second == "undefined"){
+          second = 0;
+        }
+        var third = parseInt(split_code[2]);
+        if(typeof third == "undefined"){
+          third = 0;
+        }
+        var fourth = parseInt(split_code[3]);
+        if(typeof fourth == "undefined"){
+          fourth = 0;
+        }
+        var fifth = parseInt(split_code[4]);
+        if(typeof fifth == "undefined"){
+          fifth = 0;
+        }
+        i = processor(first, second, third, fourth, fifth, i);
+        machineCoder(first, second, third, fourth, fifth);
       }
-      var third = parseInt(split_code[2]);
-      if(typeof third == "undefined"){
-        third = 0;
+      else{
+
       }
-      var fourth = parseInt(split_code[3]);
-      if(typeof fourth == "undefined"){
-        fourth = 0;
-      }
-      var fifth = parseInt(split_code[4]);
-      if(typeof fifth == "undefined"){
-        fifth = 0;
-      }
-      i = processor(first, second, third, fourth, fifth, i);
-      machineCoder(first, second, third, fourth, fifth);
     }
+  }
     else{
-
+      Alert("Too many lines MAX LINE #: 255");
     }
 
-}
+
 showRegisters();
 }
 
