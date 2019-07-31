@@ -108,6 +108,11 @@ showRegisters();
 function submit(){
 $("#machineDisplay").html(""); // Clear Contents
 var line_count= editor.doc.lineCount();
+  
+  if (line_count > 5){
+    alert("Too many lines, use less code.");  
+    return;
+  } //This should detect line count and end if higher than 255
 
 for (var i = 0; i <line_count; i++) {
     var program = editor.doc.getLine(i);
