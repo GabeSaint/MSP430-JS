@@ -939,57 +939,72 @@ function stackUpdate(stackPointer){
 
 function machineCoder(first, second, third, fourth, fifth){
   var machineLine = "";
-
-  if(first == "MOV"){
-    machineLine = machineLine.concat("0000 ");
-  }
-  else if(first == "CMP"){
-    machineLine = machineLine.concat("0001 ");
-  }
-  else if(first == "ADD"){
-    machineLine = machineLine.concat("0010 ");
-  }
-  else if(first == "ADDC"){
-    machineLine = machineLine.concat("0011 ");
-  }
-  else if(first == "INV"){
-    machineLine = machineLine.concat("0100 ");
-  }
-  else if(first == "OR"){
-    machineLine = machineLine.concat("0101 ");
-  }
-  else if(first == "XOR"){
-    machineLine = machineLine.concat("0110 ");
-  }
-  else if(first == "AND"){
-    machineLine = machineLine.concat("0111 ");
+    if(first == "MOV"){
+      machineLine = machineLine.concat("0000");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "CMP"){
+      machineLine = machineLine.concat("0001");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "ADD"){
+      machineLine = machineLine.concat("0010");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "ADDC"){
+      machineLine = machineLine.concat("0011");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "INV"){
+      machineLine = machineLine.concat("0100");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "OR"){
+      machineLine = machineLine.concat("0101");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "XOR"){
+      machineLine = machineLine.concat("0110");
+      machineLine = machineFirstCase(machineLine);
+    }
+    else if(first == "AND"){
+      machineLine = machineLine.concat("0111");
+      machineLine = machineFirstCase(machineLine);
   }
   else if(first == "RRC"){
-    machineLine = machineLine.concat("1000 ");
+    machineLine = machineLine.concat("1000");
+    machineLine = machineSecondCase(machineLine);
   }
   else if(first == "RRA"){
-    machineLine = machineLine.concat("1001 ");
+    machineLine = machineLine.concat("1001");
+    machineLine = machineSecondCase(machineLine);
   }
   else if(first == "CALL"){
-    machineLine = machineLine.concat("1010 ");
+    machineLine = machineLine.concat("1010");
+    machineLine = machineSecondCase(machineLine);
   }
   else if(first == "RET"){
-    machineLine = machineLine.concat("1011 ");
+    machineLine = machineLine.concat("1011");
+    machineLine = machineThirdCase(machineLine);
   }
   else if(first == "JMZ"){
     machineLine = machineLine.concat("1100 ");
+    machineLine = machineFourthCase(machineLine);
   }
   else if(first == "JMC"){
-    machineLine = machineLine.concat("1101 ");
+    machineLine = machineLine.concat("1101");
+    machineLine = machineFourthCase(machineLine);
   }
   else if(first == "JMN"){
-    machineLine = machineLine.concat("1110 ");
+    machineLine = machineLine.concat("1110");
+    machineLine = machineFourthCase(machineLine);
   }
   else if(first == "JMU"){
-    machineLine = machineLine.concat("1111 ");
+    machineLine = machineLine.concat("1111");
+    machineLine = machineFourthCase(machineLine);
   }
   else if(first == "ALERT"){
-    machineLine = machineLine.concat("001");
+    machineLine = machineLine.concat("xxxxxxxxxxxxxxxx");
   }
   else{
     var text = "Unknown operation detected at "+ lineValue;
@@ -997,12 +1012,67 @@ function machineCoder(first, second, third, fourth, fifth){
   }
 // Above adds the first 4 bits based off the instruction
 // Next we convert each following value to bits then append
-  machineLine = machineLine.concat(second.toString(2)+" "); // Register
-  machineLine = machineLine.concat(third.toString(2)+" "); // Register
-  machineLine = machineLine.concat(" X "); // 4th bit is Xed out
-  machineLine = machineLine.concat(fourth.toString(2)+" ");
-  machineLine = machineLine.concat(fifth.toString(2)+" ");
+function machineFirstCase(machineLine){
+  machineLine = machineLine.concat(get4Bits(second)); // Register
+  machineLine = machineLine.concat(get4Bits(third)); // Register
+  machineLine = machineLine.concat("x"); // 4th bit is Xed out
+  machineLine = machineLine.concat(fourth.toString(2));
+  machineLine = machineLine.concat(get2Bits(fifth));
+  return machineLine;
+}
+function machineSecondCase(machineLine){
+  machineLine = machineLine.concat(get4Bits(second)); // Register
+  machineLine = machineLine.concat("xxxx"); // Register
+  machineLine = machineLine.concat("x"); // 4th bit is Xed out
+  machineLine = machineLine.concat(fourth.toString(2));
+  machineLine = machineLine.concat(get2Bits(fifth));
+  return machineLine;
+}
+function machineThirdCase(machineLine){
+  machineLine = machineLine.concat("xxxx"); // Register
+  machineLine = machineLine.concat("xxxx"); // Register
+  machineLine = machineLine.concat("x"); // 4th bit is Xed out
+  machineLine = machineLine.concat("x");
+  machineLine = machineLine.concat("xx");
+  return machineLine;
+}
+function machineFourthCase(machineLine){
+  machineLine = machineLine.concat("xxxx"); // Register
+  machineLine = machineLine.concat(get8Bits(second)); // Register
+  return machineLine;
+}
 // Values have been converted
 // Append
 $("#machineDisplay").append(machineLine +'<br>'); // BR is there to break each new run onto a new line.
+}
+function get4Bits (value){
+  var string;
+  string = value.toString(2);
+  while (string.length < 4){
+  string = "0" + string;
+}
+return string;
+}
+function get2Bits (value){
+  var string;
+  string = value.toString(2);
+  while (string.length < 2){
+  string = "0" + string;
+}
+return string;
+}
+function get8Bits(value){
+  var string;
+  if(value < 0){
+    string = (value>>>0).toString(2);
+    string = string.slice(25,32);
+    string = "1"+string;
+  }
+  else{
+     string= value.toString(2);
+     while(string.length < 8){
+       string = "0" + string;
+     }
+  }
+  return string;
 }
