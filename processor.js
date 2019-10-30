@@ -305,7 +305,6 @@ else if(first == "CALL"){
 }
 else if(first == "RET"){
   lineValue = ret(lineValue)-1;
-
 }
 else if(first == "JMZ"){
   lineValue = jmz(second, lineValue)-1;
@@ -1006,7 +1005,11 @@ function machineCoder(first, second, third, fourth, fifth){
   else if(first == "ALERT"){
     machineLine = machineLine.concat("xxxxxxxxxxxxxxxx");
   }
+  else if(first == "undefined"){
+    machineLine = machineLine.concat("xxxxxxxxxxxxxxxx")
+  }
   else{
+    machineLine = machineLine.concat("xxxxxxxxxxxxxxxx")
     var text = "Unknown operation detected at "+ lineValue;
     alert(text);
   }
