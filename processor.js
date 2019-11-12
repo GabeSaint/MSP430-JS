@@ -385,7 +385,7 @@ else if(as == 2){
     }
 }
 else if(as == 3){
-    sourceValue = source*17;
+    sourceValue = gets3(source);
     nflg = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
@@ -424,7 +424,7 @@ function cmp(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     compareValue = registers[dest]-sourceValue;
@@ -476,7 +476,7 @@ function add(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     addCheck = registers[dest]+sourceValue;
@@ -528,7 +528,7 @@ function addc(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     addCheck = registers[dest]+sourceValue+cflg;
@@ -578,7 +578,7 @@ function inv(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     registers[dest]= ~sourceValue;
@@ -607,7 +607,7 @@ function or(second, third, fourth, fifth){
         sourceValue = source;
     }
     else if(as == 3){
-        sourceValue = source*17;
+        sourceValue = gets3(source);
     }
     if(ad == 0){
       registers[dest]= registers[dest]|sourceValue;
@@ -636,7 +636,7 @@ function xor(second, third, fourth, fifth){
         sourceValue = source;
     }
     else if(as == 3){
-        sourceValue = source*17;
+        sourceValue = gets3(source);
     }
     if(ad == 0){
       registers[dest]= registers[dest]^sourceValue;
@@ -665,7 +665,7 @@ function and(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     registers[dest]= registers[dest]&sourceValue;
@@ -1079,4 +1079,17 @@ function get8Bits(value){
      }
   }
   return string;
+}
+     }
+  }
+  return string;
+}
+function gets3(value){
+  if (value > 7){
+    value = value + 240;
+  }
+  else{
+    value = value;
+  }
+  return value;
 }
