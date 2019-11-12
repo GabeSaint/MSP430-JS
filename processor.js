@@ -117,10 +117,9 @@ function submit(){
 if(line_count < 255){
   for (var i = 0; i <line_count; i++) {
       var program = editor.doc.getLine(i);
-      var first;
       if(/\S/.test(program)){
         var split_code = program.split(" ",6);
-        first = split_code[0];
+        var first = split_code[0];
 
         first = first.toUpperCase();
         var second = parseInt(split_code[1]);
@@ -143,7 +142,7 @@ if(line_count < 255){
         machineCoder(first, second, third, fourth, fifth);
       }
       else{
-        first = "undefined";
+
       }
     }
   }
