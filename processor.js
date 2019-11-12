@@ -1084,12 +1084,13 @@ function get8Bits(value){
   }
   return string;
 }
-function gets3(value){
-  if (value > 7){
-    value = value + 240;
+function gets3(source){
+  var source;
+  if (source > 7){
+    source = source + 240;
   }
   else{
-    value = value;
+    source = source;
   }
-  return value;
+  return source;
 }
