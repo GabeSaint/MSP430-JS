@@ -117,9 +117,10 @@ function submit(){
 if(line_count < 255){
   for (var i = 0; i <line_count; i++) {
       var program = editor.doc.getLine(i);
+      var first;
       if(/\S/.test(program)){
         var split_code = program.split(" ",6);
-        var first = split_code[0];
+        first = split_code[0];
 
         first = first.toUpperCase();
         var second = parseInt(split_code[1]);
@@ -142,7 +143,7 @@ if(line_count < 255){
         machineCoder(first, second, third, fourth, fifth);
       }
       else{
-
+        first = "undefined";
       }
     }
   }
@@ -384,7 +385,7 @@ else if(as == 2){
     }
 }
 else if(as == 3){
-    sourceValue = source*17;
+    sourceValue = gets3(source);
     nflg = 0;
     //check if the value is zero for the z flag
     if(sourceValue == 0){
@@ -423,7 +424,7 @@ function cmp(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     compareValue = registers[dest]-sourceValue;
@@ -475,7 +476,7 @@ function add(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     addCheck = registers[dest]+sourceValue;
@@ -527,7 +528,7 @@ function addc(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     addCheck = registers[dest]+sourceValue+cflg;
@@ -577,7 +578,7 @@ function inv(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     registers[dest]= ~sourceValue;
@@ -606,7 +607,7 @@ function or(second, third, fourth, fifth){
         sourceValue = source;
     }
     else if(as == 3){
-        sourceValue = source*17;
+        sourceValue = gets3(source);
     }
     if(ad == 0){
       registers[dest]= registers[dest]|sourceValue;
@@ -635,7 +636,7 @@ function xor(second, third, fourth, fifth){
         sourceValue = source;
     }
     else if(as == 3){
-        sourceValue = source*17;
+        sourceValue = gets3(source);
     }
     if(ad == 0){
       registers[dest]= registers[dest]^sourceValue;
@@ -664,7 +665,7 @@ function and(second, third, fourth, fifth){
       sourceValue = source;
   }
   else if(as == 3){
-      sourceValue = source*17;
+      sourceValue = gets3(source);
   }
   if(ad == 0){
     registers[dest]= registers[dest]&sourceValue;
@@ -1078,4 +1079,18 @@ function get8Bits(value){
      }
   }
   return string;
+}
+     }
+  }
+  return string;
+}
+function gets3(source){
+  var source;
+  if (source > 7){
+    source = source + 240;
+  }
+  else{
+    source = source;
+  }
+  return source;
 }
