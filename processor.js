@@ -1079,20 +1079,3 @@ function get8Bits(value){
   }
   return string;
 }
-<<<<<<< HEAD
-     }
-  }
-  return string;
-}
-function gets3(source){
-  var source;
-  if (source > 7){
-    source = source + 240;
-  }
-  else{
-    source = source;
-  }
-  return source;
-}
-=======
->>>>>>> parent of 72bf1a8... Update processor.js
