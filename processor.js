@@ -1080,10 +1080,7 @@ function get8Bits(value){
   }
   return string;
 }
-     }
-  }
-  return string;
-}
+
 function gets3(source){
   var source;
   if (source > 7){
