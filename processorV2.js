@@ -1084,7 +1084,7 @@ function get8Bits(value){
 function gets3(source){
   var source;
   if (source > 7){
-    source = source + 240;
+    source = source | 0xfffffff0;
   }
   else{
     source = source;
