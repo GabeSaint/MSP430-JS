@@ -340,7 +340,7 @@ var sourceValue;
 cflg = 0;
 
 
-if(as == 0){
+if(as == 0)||(as == 1){
     sourceValue = registers[source];
     //check if the value is zero for the z flag
     if(sourceValue == 0){
@@ -356,23 +356,23 @@ if(as == 0){
       nflg = 0;
     }
 }
-else if(as == 1){
-    var mregsource = regster[source] % 255;
-    sourceValue = mregisters[mregsource];
-    //check if the value is zero for the z flag
-    if(sourceValue == 0){
-      zflg = 1;
-    }
-    else {
-      zflg = 0;
-    }
-    if(sourceValue < 0){
-      nflg = 1;
-    }
-    else{
-      nflg = 0;
-    }
-}
+// else if(as == 1){
+//     var mregsource = regster[source] % 255;
+//     sourceValue = mregisters[mregsource];
+//     //check if the value is zero for the z flag
+//     if(sourceValue == 0){
+//       zflg = 1;
+//     }
+//     else {
+//       zflg = 0;
+//     }
+//     if(sourceValue < 0){
+//       nflg = 1;
+//     }
+//     else{
+//       nflg = 0;
+//     }
+// }
 else if(as == 2){
     sourceValue = source;
     nflg = 0;
@@ -407,7 +407,7 @@ function cmp(second, third, fourth, fifth){
 
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
-  var ad = Math.abs(fourth % 2);
+  var ad = Math.abs(fourth % 1);
   var as = Math.abs(fifth % 4);
   var sourceValue;
   var compareValue;
@@ -460,7 +460,7 @@ function add(second, third, fourth, fifth){
 
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
-  var ad = Math.abs(fourth % 2);
+  var ad = Math.abs(fourth % 1);
   var as = Math.abs(fifth % 4);
   var sourceValue;
   var addCheck;
@@ -511,7 +511,7 @@ function addc(second, third, fourth, fifth){
 
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
-  var ad = Math.abs(fourth % 2);
+  var ad = Math.abs(fourth % 1);
   var as = Math.abs(fifth % 4);
   //need function variable to track value of source
   var sourceValue;
@@ -562,7 +562,7 @@ function addc(second, third, fourth, fifth){
 function inv(second, third, fourth, fifth){
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
-  var ad = Math.abs(fourth % 2);
+  var ad = Math.abs(fourth % 1);
   var as = Math.abs(fifth % 4);
   //need function variable to track value of source
   var sourceValue;
@@ -591,7 +591,7 @@ function inv(second, third, fourth, fifth){
 function or(second, third, fourth, fifth){
     var dest = Math.abs(second % 16);
     var source = Math.abs(third % 16);
-    var ad = Math.abs(fourth % 2);
+    var ad = Math.abs(fourth % 1);
     var as = Math.abs(fifth % 4);
     //need function variable to track value of source
     var sourceValue;
@@ -620,7 +620,7 @@ function or(second, third, fourth, fifth){
 function xor(second, third, fourth, fifth){
     var dest = Math.abs(second % 16);
     var source = Math.abs(third % 16);
-    var ad = Math.abs(fourth % 2);
+    var ad = Math.abs(fourth % 1);
     var as = Math.abs(fifth % 4);
     //need function variable to track value of source
     var sourceValue;
@@ -649,7 +649,7 @@ function xor(second, third, fourth, fifth){
 function and(second, third, fourth, fifth){
   var dest = Math.abs(second % 16);
   var source = Math.abs(third % 16);
-  var ad = Math.abs(fourth % 2);
+  var ad = Math.abs(fourth % 1);
   var as = Math.abs(fifth % 4);
   //need function variable to track value of source
   var sourceValue;
@@ -677,7 +677,7 @@ function and(second, third, fourth, fifth){
 }
 function rra(second, third){
 var dest = Math.abs(second % 16);
-var ad = Math.abs(third % 2);
+var ad = Math.abs(third % 1);
 var sourceValue;
 var sourceValueShifted;
 if(ad == 0){
@@ -739,7 +739,7 @@ else if(ad == 1){
 }
 function rrc(second, third, fourth, fifth){
 var dest = Math.abs(second % 16);
-var ad = Math.abs(third % 2);
+var ad = Math.abs(third % 1);
 var sourceValue;
 var sourceValueShifted;
 if(ad == 0){
@@ -1084,7 +1084,7 @@ function get8Bits(value){
 function gets3(source){
   var source;
   if (source > 7){
-    source = source | 0xfffffff0;
+    source = source | 0xfffffff;
   }
   else{
     source = source;
