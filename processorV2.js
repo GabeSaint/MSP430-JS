@@ -340,7 +340,7 @@ var sourceValue;
 cflg = 0;
 
 
-if(as == 0)||(as == 1){
+if(as == 0 || 1){
     sourceValue = registers[source];
     //check if the value is zero for the z flag
     if(sourceValue == 0){
